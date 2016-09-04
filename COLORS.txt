@@ -1,0 +1,7 @@
+			Main	Theory	p5.js
+			Blue	Green	Magenta
+Background:	222222	2D2D2D	212121
+Foreground:	A2A2A2	D8D8D8	9D9D9D
+Highlights:	0040D5	6DF100	D200D2
+
++000000

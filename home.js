@@ -1,7 +1,14 @@
-$( ".a" ).click(function() {
-  console.log("clicked");
-  var a = Array.apply(null, Array(5)).map(function (_, i) {return i;});
-  for (var item in a) {
-    window.open("http://www.w3schools.com");
-  }
-});
+$("#header").load("header.html");
+function setup() {
+	var cnv = createCanvas(windowWidth, windowHeight);
+	cnv.position(0, 0);
+	noFill();
+	stroke(255);
+	strokeWeight(4);
+	background(51);
+}
+
+function draw() {
+	background(51);
+	ellipse(mouseX, mouseY, 300);
+}
