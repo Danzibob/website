@@ -1,0 +1,45 @@
+<html>
+
+<head>
+<title>Danny's Computing</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="http://danzibob.tk/Theory/page.css">
+
+<body>
+	<a href="http://danzibob.tk/index.html"><h1>Networks</h1></a>
+    
+    <div id="left_pane">
+      <h3>Links</h3>
+      <a href="https://sites.google.com/a/nhgs.co.uk/nhgs-computing/home/subject-resources/as-a-level-overview">
+        <div class="button">
+          <p>A-level Computing Site</p>
+	    </div>
+      </a>
+
+      <a href="http://danzibob.tk">
+		<div class="button">
+			<p>Home</p>
+        </div>
+      </a>
+    </div>
+                
+	<div id="main_pane">
+		<div class="post">
+			<h3>Network Topologies</h3>
+			<h4>Bus</h4>
+			<img class="post_image" src="Images/busNetwork.png" />
+			<p>A bus network is a network topology in which all computers are connected to a single back-bone wire. While this is a simple system to setup, It has the disadvantage of data-collisions, as data can travel in both directions down the back-bone. It also requires terminators at both ends to prevent data reflecting back and creating more collisions. Bus is also vunerable in that if the back-bone fails, the whole network goes down.</p>
+			<div style="width:100%;clear:left;"></div>
+<h4>Star</h4>
+			<img class="post_image" src="Images/starNetwork.png" />
+			<p>The star network topology is a method in which all devices are connected to one central server or switch individually. It's more robust than bus, as any one cable failing doesn't compromise the others. It's also safer in terms of data corruption, as data collisions are avoided because there are only 2 devices on each cable. It's also very easy to add new devices to a star network; simply connect another device to the switch. Star networks are the most common network topology.</p>
+			<div style="width:100%;height:2px;background-color:red;"></div>
+<h4>Ring</h4>
+			<img class="post_image" src="Images/ringNetwork.png" />
+			<p>Ring topology networks overcome the problem of data collisions by creating a ring of connections that data can only travel through in one direction. Ring networks are vunerable, as if one cable fails, the whole network is unable to communicate with the rest. Ring networks are also relatively difficult to add new devices to.</p>
+		</div>
+	</div>
+</body>
+
+</html>		

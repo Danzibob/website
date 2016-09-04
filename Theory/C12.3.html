@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<title>Danny's Computing</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="http://danzibob.tk/Theory/page.css">
+
+<body>
+	<a href="http://danzibob.tk/index.html"><h1>Danny's Computing Portfolio</h1></a>
+    
+    <div id="left_pane">
+      <h3>Links</h3>
+      <a href="https://sites.google.com/a/nhgs.co.uk/nhgs-computing/home/subject-resources/as-a-level-overview">
+        <div class="button">
+          <p>A-level Computing Site</p>
+	    </div>
+      </a>
+
+      <a href="http://danzibob.tk">
+		<div class="button">
+			<p>Home</p>
+        </div>
+      </a>
+    </div>
+                
+	<div id="main_pane">
+		<div class="post">
+			<h3>Representing real numbers in binary</h3>
+			<p>Floating point numbers in binary are similar to base 10 standard form. A 8 bit binary number for example, may use a 5 bit <strong style="color:yellow;">mantissa</strong> and a 3 bit <strong style="color:green;">exponent</strong>.</p>
+			<p>The <strong style="color:yellow;">mantissa</strong> refers to the numerical part of the standard form (ie the bit thats going to be multiplied), and works like a normal binary decimal:</p>
+			<table style="width:350px">
+				<tr><td>-1</td><td><strong>.</strong></td><td>1/2</td><td>1/4</td><td>1/8</td><td>1/16</td></tr>
+				<tr><td>0</td><td><strong>.</strong></td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+			</table>
+			<p>NB: the decimal point isn't it's own bit, the processor already 'knows' it should be there</p>
+			<br/>
+			<p>The <strong style="color:green;">exponent</strong> refers to the part of the standard form that is multiplying the mantissa. It is expressed as a 2's compliment binary integer</p>
+			<table style="width:180px">
+				<tr><td>-4</td><td>2</td><td>1</td></tr>
+				<tr><td>0</td><td>1</td><td>1</td></tr>
+			</table>
+			<p>The exponent here is 3, meaning the mantissa is multiplied by 2<sup>3</sup> = 8. i.e: the decimal point moves 3 places to the right:<p>
+			<p><strong style="color:yellow;">0.1101</strong> x 10<sup><strong style="color:green;">11</strong></sup> = 110.1</p>
+			<p><strong style="color:yellow;">0.8125</strong> x 2<sup><strong style="color:green;">3</strong></sup> = 6.5</p>
+		</div>
+	</div>
+</body>
+
+</html>		

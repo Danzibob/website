@@ -1,0 +1,44 @@
+<html>
+<head><title>Virtual Hugs</title></head>
+<body>
+<link rel="stylesheet" type="text/css" href="hugform.css">
+<form action="process.php" method="post" />
+<div class="post">
+<h2>Virtual Hugs</h2>
+<table>
+	<tr><th>
+		<p>Sender (you!): </p>
+	</th><th>
+		<p>Recipient: </p>
+	</th></tr>
+	<tr><td>
+		<input type="text" name="sender"/ required>
+	</td><td>
+		<input type="text" name="recipient"/ required>
+	</td></tr>
+	<tr><td>
+		<input type="radio" name="gif" value="hug2" checked="checked"> Hey.
+	</td><td>
+		<img src="hug2.gif"/>
+	</td></tr>
+	<tr><td>
+		<input type="radio" name="gif" value="bench"> Bench
+	</td><td>
+		<img src="bench.gif"/>
+	</td></tr>
+        <tr><td>
+		<input type="radio" name="gif" value="bed"> Bed
+	</td><td>
+		<img src="bed.gif"/>
+	</td></tr>
+        <tr><td colspan=2>
+                <h3>Message:  (optional)</h3>
+                <input type="text" name="message" style="width:100%;height:50px;"/>
+        </td></tr>
+</table>
+<input type="submit" value="Send hug">
+</div>
+</form>
+<p class="subtext">Website and animations by Danny Roberts © 2016 </p>
+</body>
+</html>

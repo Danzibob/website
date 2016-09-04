@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<title>Danny's Computing</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="page.css">
+
+<body>
+  <a href="http://danzibob.tk/index.html"><h1>Data Types</h1></a>
+    
+  <div id="left_pane">
+    <h3>Links</h3>
+      <a href="https://sites.google.com/a/nhgs.co.uk/nhgs-computing/home/subject-resources/as-a-level-overview">
+        <div class="button">
+          <p>A-level Computing Site</p>
+	</div>
+      </a>
+      <a href="">
+	<div class="button">
+	  <p>Chapter 11 Work</p>
+        </div>
+      </a>
+    </div>            
+  
+  <div id="main_pane">
+    
+	<div class="post">
+      
+		<h3>Numbers</h3>
+		<p>Numbers in a computer system are stored as bytes of 1s and 0s, using the binary number system:</p>
+		<table>
+		<tr><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+		<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+		</table>
+	</div>
+	<div class="post">
+		<h3>Negative Numbers</h3>
+		<p>There are 2 main methods of storing negative numbers in computers: Two's compliment, and sign magnitude</p>
+		<h4>Two's compliment</h4>
+		<p>In this method, the MSB's (Most Significant Bit's) value is made negative, as shown below with the number -92:</p>
+		<table>
+		<tr><td>-128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+		<tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+		</table>
+		<p>This means that the maximum value for a two's compliment binary integer is |MSB|-1, and the minimum value is -|MSB|</p>
+		<h4>Sign magnitude</h4>
+		<p>Sign magnitude replaces the MSB with a bit indicating a sign, with 0 meaning positive, and 1 meaning negative. This is demonstrated below, also with -92</p>
+		<table>
+		<tr><td>+/-</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+		<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+		</table>
+		<p> The max and min values for sign magnitude numbers are one less than the original MSB</p>
+	
+	</div>
+  </div>
+</body>
+
+</html>		
