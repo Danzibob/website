@@ -1,4 +1,7 @@
-$("#header").load("header.html");
+$(document).ready(function() {
+	$("#header").load("http://danzibob.tk/header.html");	
+});
+
 function setup() {
 	var cnv = createCanvas(windowWidth, windowHeight);
 	cnv.position(0, 0);
