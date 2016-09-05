@@ -9,7 +9,6 @@ $(window).resize(function(){
 });
 
 
-
 var cells = [];
 var W = 40;
 
@@ -23,19 +22,22 @@ function setup() {
 		}
 	}
 	
-	
 	colorMode(HSB,100);
-	noFill();
 	stroke(255);
 	strokeWeight(4);
 	background(0,0,20);
+	for(var i = 0; i < cells.length; i++){
+		cells[i].show();
+	}
 }
 
 function draw() {
-	background(0,0,20);
-	for(var i = 0; i < cells.length; i++){
-		cells[i].increment();
-		cells[i].show();
+	if ($('body:hover').length != 0) {
+		background(0,0,20);
+		for(var i = 0; i < cells.length; i++){
+			cells[i].increment();
+			cells[i].show();
+		}
 	}
 }
 
