@@ -1,26 +1,42 @@
 <div id="flexbar">
 	<div id="flextitle"><h1>Danny's Computing Portfolio</h1></div>
-	<div class="flexlink"><h3>a link</h3></div>
-	<div class="flexlink"><h3>a link</h3></div>
-	<div class="flexlink"><h3>a link</h3></div>
-	<div class="flexlink"><h3>a link</h3></div>
+	<a class="flexlink" href="http://danzibob.tk"><h3>Home</h3></a>
+	<a class="flexlink" href="http://danzibob.tk/Theory"><h3>Theory</h3></a>
+	<a class="flexlink" href="http://danzibob.tk"><h3>Projects</h3></a>
+	<a class="flexlink" href="http://danzibob.tk"><h3>ProgSoc</h3></a>
 </div>
 
 <style>
 #flexbar{
 	display: flex;
-	align-items:baseline;
+	align-items:stretch;
 	height:60px;
 }
 #flextitle{
 	flex-grow:3;
-	height:100%;
 }
 .flexlink{
+	display:block;
 	flex-grow:1;
-	height:100%;
+	background-color:#000000;
+	border: 1px red solid;
+	
+	text-align:center;
 }
-#flextitle h1, .flexlink h3{
+#flextitle h1{
 	margin: 5px 0px 5px 0px;
+}
+.flexlink h3{
+	margin: 16px 0px 15px 0px;
+	font-size:25px;
+}
+h1,h2,h3,h4{
+    color:#FFFFFF;
+}
+*{
+	font-family: "Arial", sans-serif;
+}
+a{
+	text-decoration:none;
 }
 </style>
