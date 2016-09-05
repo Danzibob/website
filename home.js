@@ -45,9 +45,10 @@ var Cell = function(x,y){
 	this.x = x*W;
 	this.y = y*W;
 	this.hue = 0;
+	this.sat = 100;
 	this.show = function(){
 		noStroke();
-		fill(this.hue,80,80)
+		fill(this.hue,this.sat,80)
 		rect(this.x , this.y , W-2, W-2, 5);
 	}
 	this.increment = function(){
@@ -55,9 +56,8 @@ var Cell = function(x,y){
 		if(d < 300){
 			d = 60/(d+50) -0.18;
 			this.hue += d;
-		}
-		if(this.hue >= 100){
 			this.hue = this.hue%100;
+		
 		}
 	}
 }
