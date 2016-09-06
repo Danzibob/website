@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#header").load("http://danzibob.tk/header.html");	
+	$("#header").load("http://danzibob.co.uk/header.html");	
 });
 
 $(window).resize(function(){
