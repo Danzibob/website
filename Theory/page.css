@@ -10,29 +10,32 @@ body{
 #left_pane{
 	float:left;
 	width:120px;
-	background-color:#1F0937;
+	background-color:#222222;
 	padding:10px;
 	padding-top:10px;
+	margin-top:10px;
 	text-align:center;
     border-style: solid;
     border-width: 2px;
-    border-color: #FFFFFF;
+    border-color: #D8D8D8;
 	}
 #right_pane{
 	float:right;
 	width:120px;
-	background-color:#1F0937;
+	background-color:#222222;
 	padding:10px;
 	padding-top:5px;
+	margin-top:10px;
 	text-align:center;
 	border-style: solid;
 	border-width: 2px;
-	border-color: #FFFFFF;
+	border-color: #D8D8D8;
 	}
 #main_pane{
 	margin-left:120px;
 	padding:10px;
 	padding-top:0px;
+	margin-top:10px;
 }
 div.button{
 	text-align:center;
@@ -41,12 +44,12 @@ div.button{
 	color:#1F0937;
 	width:100px;
 	height:auto;
-	background-color:#F63D07;
+	background-color:#222222;
 	margin:auto;
 	margin-bottom:5px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #FFFFFF;
+	border-color: #D8D8D8;
 	border-radius:8px;
 	}
 h1,h2,h3,h4,h5,th{
@@ -54,7 +57,7 @@ h1,h2,h3,h4,h5,th{
     align:centre;
         }
 p,td{
-    color:#FFFFFF;
+    color:#D8D8D8;
     font-size:0.8em;
 }
 a{
@@ -66,16 +69,16 @@ div.post{
     margin:20px;
     padding:10px;
     margin-top:0px;
-    background-color:#1F0937;
-    color:#FFFFFF;
+    background-color:#222222;
+    color:#D8D8D8;
     border-radius: 8px;
     border-style: solid;
     border-width: 2px;
-    border-color: #FFFFFF;
+    border-color: #D8D8D8;
 }
 table,td,th{
     border-style: solid;
-    border-color: #FFFFFF;
+    border-color: #D8D8D8;
 }
 td,th{
     border-width:1px;
@@ -94,4 +97,10 @@ img.post_image{
 p.label{
     float:right;
     font-size:12px;
+}
+h1{
+	margin-top:10px;
+	margin-bottom:-10px;
+	display: absolute;
+	float:left;
 }

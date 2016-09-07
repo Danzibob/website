@@ -1,6 +1,12 @@
 <html>
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+    	$(document).ready(function() {
+    		$("#header").load("http://danzibob.co.uk/header.html");
+    	});
+    </script>
 <title>Danny's Computing</title>
 </head>
 
@@ -8,7 +14,9 @@
 
 <body>
   <a href="http://danzibob.tk/index.html"><h1>Software Development Methodologies</h1></a>
-    
+  <div id="header"></div>
+  <div style="float:clear; height:60px; width:100%"></div>
+
   <div id="left_pane">
     <h3>Links</h3>
       <a href="https://sites.google.com/a/nhgs.co.uk/nhgs-computing/home/subject-resources/as-a-level-overview">
@@ -23,7 +31,7 @@
         </div>
       </a>
     </div>
-                
+
   <div id="main_pane">
     <div class="post">
 <h3>Waterfall Method</h3>
@@ -67,7 +75,7 @@
 </ul></td></tr>
 </table>
     </div>
-    
+
     <div class="post">
 <h3>Spiral method</h3>
 <img src="Images/spiral.jpg" class="post_image" style="height:350px;"></img>
@@ -94,4 +102,4 @@
 </div>
 </body>
 
-</html>			
+</html>

@@ -1,6 +1,12 @@
 <html>
 
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#header").load("http://danzibob.co.uk/header.html");
+		});
+	</script>
 <title>Danny's Computing</title>
 </head>
 
@@ -8,7 +14,9 @@
 
 <body>
 	<a href="http://danzibob.tk/index.html"><h1>Stacks & Queues</h1></a>
-    
+	<div id="header"></div>
+	<div style="float:clear; height:60px; width:50%"></div>
+
     <div id="left_pane">
       <h3>Links</h3>
       <a href="https://sites.google.com/a/nhgs.co.uk/nhgs-computing/home/subject-resources/as-a-level-overview">
@@ -23,18 +31,18 @@
         </div>
       </a>
     </div>
-             
-			 
+
+
 	<div id="main_pane">
-	
+
 		<div class="post">
 			<h3>Stack</h3>
 			<img class="post_image" src="Images/stack.png" />
 			<p>An ordered set of data that can only be accessed in a LIFO fashion, adding entries to the top and reading them from the top</p>
                         <div style="width:100%"></div>
 		</div>
-	
+
 	</div>
 </body>
 
-</html>		
+</html>
