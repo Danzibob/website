@@ -46,7 +46,7 @@ function draw() {
 var Cell = function(x,y){
 	this.x = x*W;
 	this.y = y*W;
-	this.hue = 0;
+	this.hue = 67;
 	this.sat = 100;
 	this.show = function(){
 		noStroke();
