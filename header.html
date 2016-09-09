@@ -8,10 +8,12 @@
 <style>
 #flexbar{
 	display: flex;
+	position: fixed;
 	align-items:stretch;
 	height:60px;
-	width: 45vw;
-	float:right;
+	width: calc(45vw + 22px);
+	float:left;
+	margin-left: 4px;
 }
 #flextitle{
 	flex-grow:3;
@@ -21,8 +23,10 @@
 	flex-grow:1;
 	background-color:#222222;
 	border: 1px #D8D8D8 solid;
-
 	text-align:center;
+}
+.flexlink:hover{
+	border: 1px #D200D2 solid
 }
 .flexlink h3{
 	margin: 16px 0px 15px 0px;
