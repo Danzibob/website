@@ -1,39 +1,57 @@
 <div id="flexbar">
-	<a class="flexlink" href="http://danzibob.co.uk"><h3>Home</h3></a>
-	<a class="flexlink" href="/Theory"><h3>Theory</h3></a>
-	<a class="flexlink" href="http://danzibob.co.uk"><h3>Projects</h3></a>
-	<a class="flexlink" href="http://danzibob.co.uk"><h3>ProgSoc</h3></a>
+    <a class="flexlink" href="http://danzibob.co.uk">
+        <h3>Home</h3>
+    </a>
+    <a class="flexlink" href="/Theory">
+        <h3>Theory</h3>
+		<ul>
+			<li>Archive</li>
+		</ul>
+    </a>
+    <a class="flexlink" href="http://danzibob.co.uk">
+        <h3>Projects</h3>
+    </a>
+    <a class="flexlink" href="http://danzibob.co.uk">
+        <h3>ProgSoc</h3>
+    </a>
 </div>
 
 <style>
-#flexbar{
-	display: flex;
-	position: fixed;
-	align-items:stretch;
-	height:60px;
-	width: calc(45vw + 22px);
-	float:left;
-	margin-left: 4px;
-}
-#flextitle{
-	flex-grow:3;
-}
-.flexlink{
-	display:block;
-	flex-grow:1;
-	background-color:#222222;
-	border: 1px #D8D8D8 solid;
-	text-align:center;
-}
-.flexlink:hover{
-	border: 1px #D200D2 solid
-}
-.flexlink h3{
-	margin: 16px 0px 15px 0px;
-	font-size:25px;
-	color:#D8D8D8;
-}
-a{
-	text-decoration:none;
-}
+    #flexbar {
+        display: flex;
+        position: fixed;
+        align-items: stretch;
+        height: 60px;
+        width: calc(45vw + 22px);
+        float: left;
+        margin-left: 4px;
+    }
+
+    #flextitle {
+        flex-grow: 3;
+    }
+
+    .flexlink {
+        display: block;
+        flex-grow: 1;
+        background-color: #222222;
+        border: 1px #D8D8D8 solid;
+        text-align: center;
+    }
+
+    .flexlink:hover {
+        border: 1px #D200D2 solid
+    }
+
+    .flexlink h3 {
+        margin: 16px 0px 15px 0px;
+        font-size: 25px;
+        color: #D8D8D8;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {}
 </style>

@@ -18,7 +18,7 @@ body{
     border-color: #D8D8D8;
 }
 #left_pane{
-	text-align:center;
+	/*text-align:center;*/
 	position:fixed;
 	top:68px;
 	left:10px;
@@ -95,4 +95,8 @@ h1{
 	margin-bottom:10px;
 	position: fixed;
 	left:calc(55vw - 44px);
+}
+code{
+	text-align:left;
+	font-family: "Consolas",monospace;
 }
