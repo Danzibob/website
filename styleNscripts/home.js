@@ -1,10 +1,10 @@
 $(document).ready(function() {
-	$("#header").load("http://danzibob.co.uk/header.html");	
+	$("#header").load("../snippets/header.html");	
 });
 
 $(window).resize(function(){
     var newwidth = $(window).width();
-    var newheight = $(window).height();      
+    var newheight = $(window).height();
     $("canvas").height(newheight).width(newwidth);
 });
 
@@ -15,13 +15,13 @@ var W = 40;
 function setup() {
 	var cnv = createCanvas(windowWidth, windowHeight);
 	cnv.position(0, 0);
-	
+
 	for(var i = -1; i < width/W + 1; i ++){
 		for(var j = -1; j < height/W + 1; j ++){
 			cells.push(new Cell(i,j));
 		}
 	}
-	
+
 	colorMode(HSB,100);
 	stroke(255);
 	strokeWeight(4);
@@ -59,7 +59,7 @@ var Cell = function(x,y){
 			d = 60/(d+50) -0.18;
 			this.hue += d;
 			this.hue = this.hue%100;
-		
+
 		}
 	}
 }

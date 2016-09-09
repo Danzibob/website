@@ -12,8 +12,8 @@ a.inner:hover {
 	text-decoration: underline;
 }
 
-#right_pane{
-	float:right;
+#left_pane{
+	float:left;
 	width:30vw;
 	background-color:#222222;
 	padding:10px;

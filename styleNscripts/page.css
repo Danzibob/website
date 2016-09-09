@@ -27,6 +27,7 @@ body{
 #right_pane{
 	float:right;
 	height:1000px;
+	margin-bottom: 5px;
 }
 div.button{
 	text-align:center;
