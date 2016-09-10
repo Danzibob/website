@@ -1,6 +1,6 @@
 var scrolled;
 $(document).ready(function() {
-    $("#header").load("../header.html");
+    $("#header").load("../snippets/header.html");
     var scroll = $(window).scrollTop();
     if (scroll == 0) {
         scrolled = false;

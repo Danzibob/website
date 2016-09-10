@@ -13,26 +13,38 @@
 
 <body>
     <a href="../index.html" id="main_header">
-        <h1>Placeholder Title</h1>
+        <h1>Intro to p5.js</h1>
     </a>
-    <div id="header"></div>
     <div style="float:clear; height:60px; width:100%"></div>
     <div id="left_pane">
-        <h3>Insert content here</h3>
+        <h3>Empty p5.js sketch</h3>
         <pre><code class="javascript"><!--
-!-->var basic = 16;
-var Example = function(){
-    this.isA = "Demonstration";
+!-->function setup(){
+    createCanvas(400,400)
 }
-for(var some; some < basic; some++){
-    console.log("Syntax highlighting");
+
+function draw(){
+    background(51)
 }</code></pre>
+    <h3>HTML for a basic p5.js sketch</h3>
+    <pre><code class="html"><!--
+!-->&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My p5.js sketch&lt;/title&gt;
+        &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js&quot;&gt;&lt;/script &gt;
+        &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.js&quot;&gt;&lt;/script &gt;
+        &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.sound.js&quot;&gt;&lt;/script &gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
     </div>
 
     <div id="right_pane">
         <h3>Subtitle</h3>
         <p>content....</p>
     </div>
+    <div id="header"></div>
 </body>
 
 </html>

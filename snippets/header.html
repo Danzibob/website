@@ -1,50 +1,85 @@
-<div id="flexbar">
-    <a class="flexlink" href="http://danzibob.co.uk">
+<div id="navbar">
+    <a href="../index.html" class="link">
         <h3>Home</h3>
     </a>
-    <a class="flexlink" href="/Theory">
-        <h3>Theory</h3>
-		<ul>
-			<li>Archive</li>
-		</ul>
-    </a>
-    <a class="flexlink" href="http://danzibob.co.uk">
-        <h3>Projects</h3>
-    </a>
-    <a class="flexlink" href="http://danzibob.co.uk">
-        <h3>ProgSoc</h3>
-    </a>
+    <div class="link">
+        <a href="../Theory"><h3>Theory</h3></a>
+        <table class="drop">
+            <tr>
+                <td onclick="location.href='../Theory_Old'"
+                class="d1">Archive</td>
+            </tr>
+        </table>
+    </div>
+    <div class="link">
+        <a href="../experiments"><h3>Projects</h3></a>
+        <table class="drop">
+            <tr>
+                    <td onclick="location.href='../experiments/Rollin/roller.html'"
+                    class="d1">Praise the almighty Rick</td>
+            </tr>
+            <tr>
+                <td onclick="location.href='../experiments/colors/colors.html'"
+                class="d2">Colors</td>
+            </tr>
+            <tr>
+                <td onclick="location.href='../experiments/kk/kk.html'"
+                class="d3">Free Doughnuts!</td>
+            </tr>
+        </table>
+    </div>
+    <div class="link">
+        <a href="../ProgSoc"><h3>ProgSoc</h3></a>
+        <table class="drop">
+            <tr>
+                <a href="">
+                    <td class="d1">p5.js</td>
+                </a>
+            </tr>
+            <tr>
+                <a href="">
+                    <td class="d2">Sessions</td>
+                </a>
+            </tr>
+            <tr>
+                <a href="">
+                    <td class="d3">Examples</td>
+                </a>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <style>
-    #flexbar {
-        display: flex;
+    #navbar {
+        display:block;
         position: fixed;
-        align-items: stretch;
         height: 60px;
-        width: calc(45vw + 22px);
-        float: left;
-        margin-left: 4px;
+        width: calc(45vw + 24px);
+        left:10px;
+        top:10px;
+
     }
 
-    #flextitle {
-        flex-grow: 3;
-    }
-
-    .flexlink {
-        display: block;
-        flex-grow: 1;
-        background-color: #222222;
-        border: 1px #D8D8D8 solid;
+    .link {
+        float:left;
+        background-color: #A20;
+        border: 2px #111 solid;
         text-align: center;
+        width: calc((100% / 4) - 4px);
+        height: calc(100% - 8px);
     }
 
-    .flexlink:hover {
-        border: 1px #D200D2 solid
+    .link:hover {
+        background-color: #C40;
+        cursor: pointer;
+        z-index:1;
     }
 
-    .flexlink h3 {
-        margin: 16px 0px 15px 0px;
+    .link h3 {
+        margin: auto;
+        padding-top: 12px;
+        padding-bottom: 11px;
         font-size: 25px;
         color: #D8D8D8;
     }
@@ -53,5 +88,70 @@
         text-decoration: none;
     }
 
-    a:hover {}
+    .drop{
+        display: none;
+        position: absolute;
+        top: calc(100% - 5px);
+        margin-left: -2px;
+        width:inherit;
+        padding: 0;
+        border: none;
+        table-layout: fixed;
+        z-index: 2;
+    }
+    .drop tr{
+        padding: 0;
+        z-index: 2;
+    }
+    .drop td{
+        display: block;
+        background-color: #C40;
+        color: #D8D8D8;
+        border: 2px rgba(0, 0, 0, 0) solid;
+        width: calc(((45vw + 22px) / 4 ) - 20px);
+        padding: 5px;
+        text-align: center;
+        transform-origin: top;
+        transform: rotateY(90deg);
+        animation-name: flop;
+        animation-duration: 500ms;
+        animation-timing-function: ease-in;
+        animation-fill-mode: forwards;
+        animation-play-state: running;
+        z-index: 2;
+    }
+    .drop td:hover{
+        border: 2px black solid;
+    }
+    .link:hover > .drop{
+        display:block;
+    }
+    .drop:hover {
+        display: block;
+    }
+
+    .d1{
+        animation-delay: 0ms;
+    }
+    .d2{
+        animation-delay: 200ms;
+    }
+    .d3{
+        animation-delay: 400ms;
+    }
+
+    @keyframes flop {
+        0% {
+            transform: rotateY(90deg);
+        }
+        100% {
+            transform: rotateY(0deg);
+        }
+    }
 </style>
+
+
+<script>
+
+
+</script>

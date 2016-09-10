@@ -1,21 +1,22 @@
-*{
+p, h1, h2, h3, h4, h5, a, td, th{
 	font-family: "Arial", sans-serif;
 	}
 body{
-    background-color:#000000;
+    background-color:#DDD;
     background-size: 100%;
     background-position: right center;
     background-repeat: repeat-y;
+	z-index:-2;
 }
 #left_pane, #right_pane{
 	width:45vw;
-	background-color:#222222;
+	background-color:#A20;
 	padding:10px;
 	padding-top:10px;
 	margin-top:10px;
     border-style: solid;
     border-width: 2px;
-    border-color: #D8D8D8;
+    border-color: #111;
 }
 #left_pane{
 	/*text-align:center;*/
@@ -23,6 +24,7 @@ body{
 	top:68px;
 	left:10px;
 	height:calc(100vh - 106px);
+	overflow-y: auto;
 }
 #right_pane{
 	float:right;
@@ -61,7 +63,7 @@ div.post{
     margin:20px;
     padding:10px;
     margin-top:0px;
-    background-color:#222222;
+    background-color:#AAA;
     color:#D8D8D8;
     border-radius: 8px;
     border-style: solid;
@@ -95,8 +97,9 @@ h1{
 	margin-bottom:10px;
 	position: fixed;
 	left:calc(55vw - 44px);
+	text-shadow: 1px 2px 3px #000;
 }
-code{
-	text-align:left;
-	font-family: "Consolas",monospace;
+.hljs{
+	font-family: Consolas, monospace;
+	font-size: 16px;
 }

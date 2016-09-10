@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#header").load("../snippets/header.html");	
+	$("#header").load("../snippets/header.html");
 });
 
 $(window).resize(function(){
@@ -47,10 +47,10 @@ var Cell = function(x,y){
 	this.x = x*W;
 	this.y = y*W;
 	this.hue = 67;
-	this.sat = 100;
+	this.sat = 60;
 	this.show = function(){
 		noStroke();
-		fill(this.hue,this.sat,80)
+		fill(this.hue,this.sat,100)
 		rect(this.x , this.y , W-2, W-2, 5);
 	}
 	this.increment = function(){
