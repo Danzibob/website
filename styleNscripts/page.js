@@ -21,3 +21,13 @@ $(window).scroll(function(event) {
         scrolled = true;
     }
 });
+
+function tab(n){
+    return ".TabX".replace("X",n)
+}
+
+function showTab(n){
+    $('.tab:visible').fadeOut("fast", function(){
+        $(tab(n)).fadeIn("fast");
+    });
+}

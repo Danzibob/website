@@ -1,0 +1,130 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../styleNscripts/page.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atom-one-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.sound.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="../styleNscripts/page.js"></script>
+    <script src="Scripts/RGB.js"></script>
+    <title>Danny's Computing</title>
+</head>
+
+
+<body>
+    <a href="../index.html" id="main_header">
+        <h1>Color, Shapes and the Mouse</h1>
+    </a>
+    <div style="float:clear; height:60px; width:100%"></div>
+    <div id="left_pane">
+
+        <div class="tab Tab1">
+            <h3>Insert content here</h3>
+            <pre class="noselect"><code class="javascript"><!--
+!-->function setup(){
+    createCanvas(400,300)
+}
+
+function draw(){
+
+}</code></pre>
+        </div>
+        <div class="tab Tab2">
+            <h3>Insert content here</h3>
+            <pre class="noselect"><code class="javascript"><!--
+!-->function setup(){
+    createCanvas(400,300)
+}
+
+function draw(){
+    background(51,51,100)
+}</code></pre>
+        </div>
+        <div class="tab Tab3">
+            <h3>Insert content here</h3>
+            <pre class="noselect"><code class="javascript"><!--
+!-->function setup(){
+    createCanvas(400,300)
+}
+
+function draw(){
+    background(51,51,100)
+    noFill()
+    stroke(255,0,0)
+    strokeWeight(4)
+    ellipse(width/2, height/2, 40)
+    rect(100,200, 20,300)
+    line(width, 0, 0, height)
+}</code></pre>
+        </div>
+        <div class="tab Tab4">
+            <h3>Insert content here</h3>
+            <pre class="noselect"><code class="javascript"><!--
+!-->function setup(){
+    createCanvas(400,300)
+}
+
+function draw(){
+    background(51,51,100)
+    noFill()
+    stroke(255,0,0)
+    strokeWeight(4)
+    ellipse(mouseX, mouseY, 60)
+}</code></pre>
+        </div>
+
+    </div>
+    <div id="right_pane">
+        <div class="button_holder" style="margin-top:10px;">
+            <div class="button" onclick="showTab(1)">The Canvas</div>
+            <div class="button" onclick="showTab(2)">Color</div>
+            <div class="button" onclick="showTab(3)">Shapes</div>
+            <div class="button" onclick="showTab(4)">The Mouse</div>
+        </div>
+        <div class="tab Tab1">
+            <h3>The Canvas</h3>
+            <p>The canvas is the main part of any p5 sketch. It's where everything
+                is drawn. The code you see to the left consists of two parts:
+                <span class="hljs-title">setup</span> and <span class="hljs-title">draw</span>.
+            </p>
+            <ul>
+                <li><span class="hljs-title">setup</span> only runs once - as soon as the page is loaded</li>
+                <li><span class="hljs-title">draw</span> runs 60 times a second, or as fast as it can go below that</li>
+            </ul>
+            <p>The <span>createCanvas</span> function does what it says on the tin
+                - creates a canvas. The two numbers are the X and Y dimensions of
+                the canvas respectively, so this canvas would be 400px wide and 300px tall.
+                By default the canvas is blank. The next step is to add color. Click
+                the tab above to move on.
+            </p>
+        </div>
+        <div class="tab Tab2">
+            <h3>Color</h3>
+            <p>The way computers display color is through lighting up Red, Green and Blue
+                LEDs in each pixel to produce the desired color. Light mixes differently
+                to the color system you may be used to. Try it out below:</p>
+            <div id="RGBSketch" class="canvas_holder"></div>
+            <p>Because of this system, the way we tell a computer a color is with
+                a list of 3 numbers, corresponding to the Red, Geen and Blue, hence RGB.
+                These numbers are usually between 0 and 255, but are also often
+                in hexadecimal (eg <span style="background-color:#6D2B6A">#6D2B6A</span>).
+                But in p5 we can stick to normal numbers. For example, the purple we
+                have above would be <span style="background-color:#6D2B6A">(109,43,106)</span>
+        </div>
+        <div class="tab Tab3">
+            <h3>Shapes</h3>
+            <p></p>
+        </div>
+        <div class="tab Tab4">
+            <h3>The Mouse</h3>
+            <p>content...</p>
+        </div>
+    </div>
+    <div id="header"></div>
+</body>
+
+</html>

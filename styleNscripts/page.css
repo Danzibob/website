@@ -3,7 +3,7 @@
     src: url("../styleNscripts/Fonts/DroidSans/DroidSans.ttf");
 }
 
-p, h1, h2, h3, h4, h5, a, td, th, div.button{
+p, h1, h2, h3, h4, h5, a, td, th, div.button, li{
 	font-family: "DroidSans","Arial", sans-serif;
 	}
 body{
@@ -117,6 +117,7 @@ h1{
 div.canvas_holder{
 	width: auto;
 	height: auto;
+    position:relative;
 }
 div.canvas_holder p{
 	font-size: 20px;
@@ -135,4 +136,23 @@ div.canvas_holder .button{
 h1,h2,h3,h4,h5,th{
     color:#FFFFFF;
     align:centre;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;
+  cursor: default;
+}
+.tab{
+    display: none;
+}
+.Tab1{
+    display: block;
+}
+p span, li span{
+    font-family: "Consolas", monospace;
+    background-color: #282C34;
 }
