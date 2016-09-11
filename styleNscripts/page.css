@@ -4,8 +4,9 @@ p, h1, h2, h3, h4, h5, a, td, th{
 body{
     background-color:#DDD;
     background-size: 100%;
-    background-position: right center;
-    background-repeat: repeat-y;
+    background-position:top left;
+    background-repeat:no-repeat;
+	/*background-image: url("../Untitled.png");*/
 	z-index:-2;
 }
 #left_pane, #right_pane{
@@ -23,29 +24,39 @@ body{
 	position:fixed;
 	top:68px;
 	left:10px;
-	height:calc(100vh - 106px);
+	height:calc(100vh - 110px);
 	overflow-y: auto;
 }
 #right_pane{
 	float:right;
-	height:1000px;
+	min-height:calc(100vh - 110px);
 	margin-bottom: 5px;
 }
 div.button{
 	text-align:center;
 	padding-top:-5px;
-	display: inline-block;
-	color:#1F0937;
+	display: block;
+	position: relative;
 	width:100px;
 	height:auto;
 	background-color:#222222;
-	margin:auto;
-	margin-bottom:5px;
+	margin: 0 auto;
 	border-style: solid;
-	border-width: 1px;
+	border-width: 2px;
 	border-color: #D8D8D8;
-	border-radius:8px;
+	/*border-radius:8px;*/
 	}
+div.button:hover{
+	cursor: pointer;
+	background-color: #333;
+}
+.button_holder{
+	text-align: center;
+	width: 100%;
+}
+.button_holder .button{
+	display: inline-block;
+}
 h1,h2,h3,h4,h5,th{
     color:#FFFFFF;
     align:centre;
@@ -63,7 +74,7 @@ div.post{
     margin:20px;
     padding:10px;
     margin-top:0px;
-    background-color:#AAA;
+    background-color:#222;
     color:#D8D8D8;
     border-radius: 8px;
     border-style: solid;
