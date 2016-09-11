@@ -1,5 +1,10 @@
-p, h1, h2, h3, h4, h5, a, td, th{
-	font-family: "Arial", sans-serif;
+@font-face {
+    font-family: DroidSans;
+    src: url("../styleNscripts/Fonts/DroidSans/DroidSans.ttf");
+}
+
+p, h1, h2, h3, h4, h5, a, td, th, div.button{
+	font-family: "DroidSans","Arial", sans-serif;
 	}
 body{
     background-color:#DDD;
@@ -13,7 +18,7 @@ body{
 	width:45vw;
 	background-color:#A20;
 	padding:10px;
-	padding-top:10px;
+	padding-top:0px;
 	margin-top:10px;
     border-style: solid;
     border-width: 2px;
@@ -29,12 +34,11 @@ body{
 }
 #right_pane{
 	float:right;
-	min-height:calc(100vh - 110px);
-	margin-bottom: 5px;
+	margin-bottom: 18px;
 }
 div.button{
 	text-align:center;
-	padding-top:-5px;
+	padding: 5px;
 	display: block;
 	position: relative;
 	width:100px;
@@ -57,11 +61,7 @@ div.button:hover{
 .button_holder .button{
 	display: inline-block;
 }
-h1,h2,h3,h4,h5,th{
-    color:#FFFFFF;
-    align:centre;
-        }
-p,td,li{
+p,td,li,a,div.button{
     color:#D8D8D8;
     font-size:12pt;
 }
@@ -113,4 +113,26 @@ h1{
 .hljs{
 	font-family: Consolas, monospace;
 	font-size: 16px;
+}
+div.canvas_holder{
+	width: auto;
+	height: auto;
+}
+div.canvas_holder p{
+	font-size: 20px;
+	float: right;
+	display: block;
+	width: calc(45vw - 370px);
+	position: relative;
+	top:50%;
+	text-align: center;
+}
+div.canvas_holder .button{
+	float:right;
+	clear:both;
+	margin-right: calc((45vw - 480px) / 2)
+}
+h1,h2,h3,h4,h5,th{
+    color:#FFFFFF;
+    align:centre;
 }
