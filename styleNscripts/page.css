@@ -156,3 +156,6 @@ p span, li span{
     font-family: "Consolas", monospace;
     background-color: #282C34;
 }
+body::-webkit-scrollbar {
+    display: none;
+}
