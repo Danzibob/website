@@ -64,10 +64,11 @@ div.button:hover{
 p,td,li,a,div.button{
     color:#D8D8D8;
     font-size:12pt;
+    line-height:1.4;
 }
 a{
     text-decoration: none;
-    font-weight: bold;
+    font-weight:bold;
 }
 div.post{
     width:auto;
@@ -155,6 +156,8 @@ h1,h2,h3,h4,h5,th{
 p span, li span{
     font-family: "Consolas", monospace;
     background-color: #282C34;
+    line-height: 1;
+    white-space:nowrap;
 }
 body::-webkit-scrollbar {
     display: none;

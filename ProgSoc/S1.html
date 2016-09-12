@@ -10,11 +10,7 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="../libraries/jquery-3.1.0.min.js" ></script>
     <script src="../styleNscripts/page.js"></script>
-    <script src="Scripts/RGB.js"></script>
-    <script src="Scripts/S1-1.js"></script>
-    <script src="Scripts/S1-2.js"></script>
-    <script src="Scripts/S1-3.js"></script>
-    <script src="Scripts/S1-4.js"></script>
+    <script src="Scripts/S1.js"></script>
     <title>Danny's Computing</title>
 </head>
 
@@ -70,14 +66,16 @@ function draw(){
 !-->function setup(){
     createCanvas(400,200)
 }
-
 function draw(){
-    background(51,51,51)
     noFill()
-    stroke(255,0,0)
+    stroke(255,map(mouseX, 0, width, 0, 255),0)
     strokeWeight(4)
     ellipse(mouseX, mouseY, 60, 60)
+}
+function mousePressed(){
+    background(51,51,51)
 }</code></pre>
+        <p>(Move your mouse over the canvas)</p>
         <div id="S1-4"></div>
         </div>
 
@@ -128,11 +126,67 @@ function draw(){
         </div>
         <div class="tab Tab3">
             <h3>Shapes</h3>
-            <p></p>
+            <p>p5 has several basic functions for drawing shapes, the main ones
+                being <span>ellipse</span>, <span>rect</span>, and <span>line</span>
+            </p>
+            <ul>
+                <li><span>line</span> takes the arguments <span>(x1, y1, x2, y2)</span>,
+                    drawing a line from point 1 to point 2. Here the p5 keywords
+                    <span>width</span> and <span>height</span> are used to make the
+                    line extend from the top right <span>(width, 0)</span> to the
+                    bottom left <span>(0, height)</span>
+                </li>
+                <li><span>rect</span> takes the arguments <span>(x, y, w, h)</span>,
+                    placing the top left corner of the shape at <span>(x,y)</span>
+                    and creating a rectangle that's <span>w</span> wide and
+                    <span>h</span> tall
+                </li>
+                <li><span>ellipse</span> also takes the arguments <span>(x, y, w, h)</span>.
+                    This puts the centre of the ellipse at <span>(x,y)</span>
+                    then stretches it out to the specified width and height.
+                </li>
+            </ul>
+            <p><strong>Remeber:</strong> Coordinates in p5 start at the top left,
+                so Y <em>increases</em> as you go <em>down</em>
+            </p>
+            <h3>Styling</h3>
+            <p>How a shape looks is changed by the sytling options you choose.
+                The main options are:</p>
+            <ul>
+                <li><span>fill(r,g,b)</span> Changes the fill color of the shape</li>
+                <li><span>noFill()</span> Turns off fill for the shape</li>
+                <li><span>stroke(r,g,b)</span> Changes the color for the shape border</li>
+                <li><span>strokeWeight(w)</span> Changes the width of the border</li>
+                <li><span>noStroke()</span> Turns off the shape border</li>
+            </ul>
         </div>
         <div class="tab Tab4">
             <h3>The Mouse</h3>
-            <p>content...</p>
+            <p>p5 has two keywords for reading the position of the mouse,
+                namely <span>mouseX</span> and <span>mouseY</span>. Theres also
+                a function called <span>mousePressed</span> that triggers on
+                every click.
+            </p>
+            <p>Here, both keywords are being used to tell the program to draw
+                an ellipse around the mouse, which is a standard use of the
+                mouse position. However, <span>mouseX</span> is also being used
+                here to change the color of the ellipse; when <span>mouseX</span>
+                increases, <span>g</span> increases too.
+            </p>
+            <p>However, the circles aren't being cleared away, because the background
+                function that usually does this job is only triggered when the mouse
+                is pressed.
+            </p>
+            <br>
+            <br>
+            <a href="https://p5js.org/reference/#/p5/map"
+                target="_blank" style="font-weight: normal;">
+                <p><strong>NB:</strong> the <span>map</span> function simply
+                scales the <span>mouseX</span> to stay between 0 and 255
+                </p>
+            </a>
+            <h3>Now it's your turn</h3>
+            <p>Go code your own design, see what happens!</p>
         </div>
     </div>
     <div id="header"></div>
