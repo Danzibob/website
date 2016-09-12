@@ -13,12 +13,12 @@ a.inner:hover {
 }
 
 #left_pane{
-	float:left;
+	float:right;
 	width:30vw;
 	background-color:#A20;
 	padding:10px;
 	padding-top:5px;
-	margin-top:20px;
+	margin-top:2px;
 	text-align:center;
 	border-style: solid;
 	border-width: 4px;
@@ -33,6 +33,31 @@ h1,h2,h3,h4{
 	color:#FFFFFF;
 	align:centre;
 }
-p{
+p, div.button{
 	color:#D8D8D8;
+}
+div.button{
+	text-align:center;
+	padding: 5px;
+	display: block;
+	position: relative;
+	width:100px;
+	height:auto;
+	background-color:#222222;
+	margin: 0 auto;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #D8D8D8;
+	/*border-radius:8px;*/
+	}
+div.button:hover{
+	cursor: pointer;
+	background-color: #444;
+}
+.button_holder{
+	text-align: center;
+	width: 100%;
+}
+.button_holder .button{
+	display: inline-block;
 }

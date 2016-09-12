@@ -52,7 +52,7 @@ div.button{
 	}
 div.button:hover{
 	cursor: pointer;
-	background-color: #333;
+	background-color: #444;
 }
 .button_holder{
 	text-align: center;
