@@ -4,13 +4,17 @@
     <link rel="stylesheet" type="text/css" href="../styleNscripts/page.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atom-one-dark.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.sound.js"></script>
+    <script src="../libraries/p5.js" ></script>
+    <script src="../libraries/p5.dom.js" ></script>
+    <script src="../libraries/p5.sound.js" ></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="../libraries/jquery-3.1.0.min.js" ></script>
     <script src="../styleNscripts/page.js"></script>
     <script src="Scripts/RGB.js"></script>
+    <script src="Scripts/S1-1.js"></script>
+    <script src="Scripts/S1-2.js"></script>
+    <script src="Scripts/S1-3.js"></script>
+    <script src="Scripts/S1-4.js"></script>
     <title>Danny's Computing</title>
 </head>
 
@@ -23,7 +27,6 @@
     <div id="left_pane">
 
         <div class="tab Tab1">
-            <h3>Insert content here</h3>
             <pre class="noselect"><code class="javascript"><!--
 !-->function setup(){
     createCanvas(400,300)
@@ -32,49 +35,50 @@
 function draw(){
 
 }</code></pre>
+        <div id="S1-1"></div>
         </div>
         <div class="tab Tab2">
-            <h3>Insert content here</h3>
             <pre class="noselect"><code class="javascript"><!--
 !-->function setup(){
     createCanvas(400,300)
 }
 
 function draw(){
-    background(51,51,100)
+    background(51,51,51)
 }</code></pre>
+        <div id="S1-2"></div>
         </div>
         <div class="tab Tab3">
-            <h3>Insert content here</h3>
             <pre class="noselect"><code class="javascript"><!--
 !-->function setup(){
     createCanvas(400,300)
 }
 
 function draw(){
-    background(51,51,100)
+    background(51,51,51)
     noFill()
     stroke(255,0,0)
     strokeWeight(4)
-    ellipse(width/2, height/2, 40)
-    rect(100,200, 20,300)
+    ellipse(width/2, height/2, 50, 100)
+    rect(10,50, 100,50)
     line(width, 0, 0, height)
 }</code></pre>
+        <div id="S1-3"></div>
         </div>
         <div class="tab Tab4">
-            <h3>Insert content here</h3>
             <pre class="noselect"><code class="javascript"><!--
 !-->function setup(){
-    createCanvas(400,300)
+    createCanvas(400,200)
 }
 
 function draw(){
-    background(51,51,100)
+    background(51,51,51)
     noFill()
     stroke(255,0,0)
     strokeWeight(4)
-    ellipse(mouseX, mouseY, 60)
+    ellipse(mouseX, mouseY, 60, 60)
 }</code></pre>
+        <div id="S1-4"></div>
         </div>
 
     </div>
@@ -114,6 +118,13 @@ function draw(){
                 in hexadecimal (eg <span style="background-color:#6D2B6A">#6D2B6A</span>).
                 But in p5 we can stick to normal numbers. For example, the purple we
                 have above would be <span style="background-color:#6D2B6A">(109,43,106)</span>
+            </p>
+            <p>In p5 many functions use color as an argument, for example:</p>
+            <ul>
+                <li><span>background(r,g,b)</span> - covers the whole canvas with the specified color</li>
+                <li><span>fill(r,g,b)</span> - specifies the color that new shapes will be filled with</li>
+                <li><span>stroke(r,g,b)</span> - specifies the edge color of new shapes</li>
+            </ul>
         </div>
         <div class="tab Tab3">
             <h3>Shapes</h3>
