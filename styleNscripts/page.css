@@ -162,3 +162,8 @@ p span, li span{
 body::-webkit-scrollbar {
     display: none;
 }
+
+a li{
+    color: #FFF;
+    font-size: 20px;
+}
