@@ -4,31 +4,39 @@
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
 $(function(){
-    var list = []
-    for(var i = 0; i < 12; i++){
-    	list.push(prompt("Enter an item"))
+    var list = []							//Creates an empty list
+    for(var i = 0; i < 12; i++){			//Loops 12 times
+    	list.push(prompt("Enter an item")) 	//Accepts input and pushes to list
     }
     var item = prompt("Which item yould you like to find")
-    var indx = list.indexOf(item)
-    if(indx != -1){
-    	alert(indx)
-    } else {
-    	alert("Not found")
+    										//Accepts user choice of item
+    var i = 0								//create pointer
+    while(list[i] != item && i < 12){ 		//while item not found and more list left
+    	i++;								//increase pointer
+    }
+    if(indx == 12){							//If the item was found
+    	alert(indx)							//output it's index
+    } else {								//If it's not
+    	alert("Not found")					//output not found
     }
 })
 </script>
 <html>
 <body>
-<pre class="noselect"><code class="javascript">var list = []
-for(var i = 0; i < 12; i++){
-	list.push(prompt("Enter an item"))
+<pre class="noselect"><code class="javascript">var list = []							//Creates an empty list
+for(var i = 0; i < 12; i++){			//Loops 12 times
+	list.push(prompt("Enter an item")) 	//Accepts input and pushes to list
 }
 var item = prompt("Which item yould you like to find")
-var indx = list.indexOf(item)
-if(indx != -1){
-	alert(indx)
-} else {
-	alert("Not found")
+										//Accepts user choice of item
+var i = 0								//create pointer
+while(list[i] != item &amp;&amp; i < 12){ 		//while item not found and more list left
+	i++;								//increase pointer
+}
+if(indx == 12){							//If the item was found
+	alert(indx)							//output it's index
+} else {								//If it's not
+	alert("Not found")					//output not found
 }</code></pre>
 </body>
 </html>
