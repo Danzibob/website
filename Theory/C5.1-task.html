@@ -1,0 +1,13 @@
+<script>
+var list = []
+for(var i = 0; i < 12; i++){
+	list.push(prompt("Enter an item"))
+}
+var item = prompt("Which item yould you like to find")
+var indx = list.indexOf(item)
+if(indx != -1){
+	alert(indx)
+} else {
+	alert("Not found")
+}
+</script>
