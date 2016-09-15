@@ -1,17 +1,20 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atom-one-dark.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+<script src="../libraries/jquery-3.1.0.min.js" ></script>
 <script>
-var list = []
-for(var i = 0; i < 12; i++){
-	list.push(prompt("Enter an item"))
-}
-var item = prompt("Which item yould you like to find")
-var indx = list.indexOf(item)
-if(indx != -1){
-	alert(indx)
-} else {
-	alert("Not found")
-}
+$(function(){
+    var list = []
+    for(var i = 0; i < 12; i++){
+    	list.push(prompt("Enter an item"))
+    }
+    var item = prompt("Which item yould you like to find")
+    var indx = list.indexOf(item)
+    if(indx != -1){
+    	alert(indx)
+    } else {
+    	alert("Not found")
+    }
+})
 </script>
 
 <pre class="noselect"><code class="javascript">var list = []
