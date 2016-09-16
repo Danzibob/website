@@ -71,16 +71,17 @@ a{
     font-weight:bold;
 }
 div.post{
-    width:auto;
-    margin:20px;
+    width:90%;
+    margin:5%;
     padding:10px;
-    margin-top:0px;
-    background-color:#222;
+    margin-top:80px;
+    background-color:#A20;
     color:#D8D8D8;
     border-radius: 8px;
     border-style: solid;
     border-width: 2px;
-    border-color: #D8D8D8;
+    border-color: #111;
+    height:410px;
 }
 table,td,th{
     border-style: solid;
@@ -166,4 +167,20 @@ body::-webkit-scrollbar {
 a li{
     color: #FFF;
     font-size: 20px;
+}
+
+.sketch_text{
+    display:block;
+    width:100%;
+    height:auto;
+}
+
+.sketch_text canvas{
+    float:left;
+}
+.sketch_text pre{
+    float:right;
+    display:block;
+    width:auto;
+    min-height:90%;
 }

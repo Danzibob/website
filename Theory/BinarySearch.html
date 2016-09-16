@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>binary search</title>
+    <script src="../libraries/p5.js" ></script>
+    <script src="../libraries/p5.dom.js" ></script>
+    <script src="../libraries/p5.sound.js" ></script>
+    <script>
+var inputs = []
+var submit
+var queryInput
+var querySubmit
+var vals
+function setup() {
+  for(var i = 0; i < 12; i++){
+  	var a = createInput('')
+  	a.parent("container")
+  	inputs.push(a)
+  }
+  submit = createButton("Submit Items")
+  submit.mousePressed(enterVals)
+  queryInput = createInput("Enter the item youd like to find")
+  querySubmit = createButton("Submit Query")
+  querySubmit.mousePressed(run)
+}
+
+function enterVals() {
+	vals = []
+  for(i in inputs){
+  	vals.push(inputs[i].value())
+  }
+  console.log(vals)
+  vals.sort()
+}
+
+function binarySearch(item, list, lb = 0, ub = "NA"){
+	if(ub == "NA"){
+		ub = list.length-1
+	}
+	mid = round((ub+lb)/2 +0.1)
+
+	if(item > list[mid]){
+		lb = mid
+		return binarySearch(item, list, lb, ub)
+	} else if(item < list[mid]){
+		ub = mid
+		return binarySearch(item, list, lb, ub)
+	} else if(list[mid] == item){
+		return mid
+	} else if(ub - lb <= 1){
+		return -1
+	}
+
+}
+
+function run(){
+	var query = queryInput.value()
+	var result = binarySearch(query, vals)
+	if(result != -1){
+		alert("Item was found at position " + String(result))
+	} else {
+		alert("Item was not found")
+	}
+}
+    </script>
+
+    <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+  </head>
+  <body>
+  	<div style="width:200px;" id="container"></div>
+  </body>
+</html>

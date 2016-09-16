@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../styleNscripts/page.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atom-one-dark.min.css"> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script src="../libraries/p5.js" ></script>
+    <script src="../libraries/p5.dom.js" ></script>
+    <script src="../libraries/p5.sound.js" ></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../libraries/jquery-3.1.0.min.js" ></script>
+    <script src="../styleNscripts/page.js"></script>
+    <script src="Scripts/p5demo.js"></script>
+    <title>Danny's Computing</title>
+</head>
+
+
+<body>
+<div class="post">
+    <div class="sketch_text" id="demo-1">
+        <pre class="noselect"><code class="javascript">
+function setup(){
+    createCanvas(600,400)
+    noFill()
+    stroke(255,0,0)
+    strokeWeight(8)
+}
+function draw(){
+    background(51)
+    ellipse(mouseX, mouseY, 100, 100)
+}
+        </code></pre>
+    </div>
+</div>
+<div class="post">
+    <div class="sketch_text" id="demo-2">
+        <pre class="noselect"><code class="javascript">
+function setup(){
+    createCanvas(600,400)
+    colorMode(HSB)
+}
+function draw(){
+    hue = map(mouseX, 0, width, 0, 360)
+    brightness = map(mouseY, 0, height, 0, 100)
+    fill(hue, 100, brightness)
+    background(100)
+    ellipse(mouseX, mouseY, 60, 60)
+}
+        </code></pre>
+    </div>
+</div>
+<div class="post">
+    <div class="sketch_text" id="demo-3">
+        <pre class="noselect"><code class="javascript">
+var x
+var y
+function setup(){
+    createCanvas(600,400)
+    background(51)
+    x = width/2 -10
+    y = height/2 -10
+    rect(x, y, 20,20)
+    noStroke()
+}
+function draw(){
+    if(keyIsDown(LEFT_ARROW)){x-=5}
+    if(keyIsDown(RIGHT_ARROW)){x+=5}
+    if(keyIsDown(UP_ARROW)){y-=5}
+    if(keyIsDown(DOWN_ARROW)){y+=5}
+    rect(x, y, 20,20)
+}
+function mousePressed(){background(51)}
+        </code></pre>
+    </div>
+</div>
+<div class="post">
+    <div class="sketch_text" id="demo-4">
+
+    </div>
+</div>
+<!-- <div class="post">
+    <div class="sketch_text" id="demo-5">
+        <pre class="noselect"><code class="javascript">
+            this is a test
+        </code></pre>
+    </div>
+</div> -->
+<div id="header"></div>
+</body>
+
+</html>
