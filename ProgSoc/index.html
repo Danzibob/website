@@ -2,6 +2,10 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="../libraries/p5.js" ></script>
+<script src="../libraries/p5.dom.js" ></script>
+<script src="../libraries/p5.sound.js" ></script>
+<script src="Scripts/flowField.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#header").load("../snippets/header.html");
@@ -17,7 +21,7 @@
 	<div style="float:clear; height:60px; width:50%"></div>
 	<div id="left_pane">
 		<h3>Submission of the week</h3>
-		<p><em>Awaiting submissions, updated every Sunday</em></p>
+		<div id="canvas_holder"></div>
 		<p>Email me your project as an attachment or just a link to your github,
 			and have a chance of being featured on this site! May be the best
 			work from the session, or a different piece that's been submitted.
