@@ -10,7 +10,8 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="../libraries/jquery-3.1.0.min.js" ></script>
     <script src="../styleNscripts/page.js"></script>
-    <title>Danny's Computing</title>
+    <script src="Scripts/S2.js"></script>
+    <title>ProgSoc</title>
 </head>
 
 
@@ -20,15 +21,106 @@
     </a>
     <div style="float:clear; height:60px; width:100%"></div>
     <div id="left_pane">
-        <pre><code class="javascript"><!--
-!-->
+        <div class="tab Tab1">
+            <pre class="noselect"><code class="javascript"><!--
+!-->var SliderA    //You dont always have to assign a value
+//SliderA is declared outside of a function so it's global
+function setup(){
+    createCanvas(400,200)
+    SliderA = createSlider(0,100,50,1)
+    var SliderB = createSlider(0,100,50,1)
+    //SliderB is declared within setup, so it's local
+}
+function draw(){
+    background(51)
+    fill(255)
+    textSize(100)
+    var A = SliderA.value()
+    var B = SliderB.value()
+    //^^this won't work becuase SliderB is local to setup
+    text("A: " + String(A),10,10)
+    text("A: " + String(B),10,110)
 
+}
 </code></pre>
+        <div id="S2-1"></div>
+        <div id="slider_holder"></div>
+        </div>
+        <div class="tab Tab2">
+            <pre class="noselect"><code class="javascript"><!--
+!--></code></pre>
+        <div id="S2-2"></div>
+        </div>
+        <div class="tab Tab3">
+            <pre class="noselect"><code class="javascript"><!--
+!--></code></pre>
+        <div id="S2-3"></div>
+        </div>
     </div>
 
     <div id="right_pane">
-        <h3>Subtitle</h3>
-        <p>content....</p>
+        <div class="button_holder" style="margin-top:10px;">
+            <div class="button" onclick="showTab(1)">Variables</div>
+            <div class="button" onclick="showTab(2)">Lists</div>
+            <div class="button" onclick="showTab(3)">Shapes</div>
+        </div>
+        <div class="tab Tab1">
+            <h3>Variables</h3>
+            <p>A variable is the way a program stores data. They are common across
+                 almost all langauges. In JavaScript you create variables as follows:
+            </p>
+            <pre class="noselect"><code class="javascript">var bannana = 4
+var appple = "red"</code></pre>
+            <p>The <span>var</span> part is only needed when you first declare
+                the variable. When you use the variable it's not neccessary:</p>
+            <pre class="noselect"><code class="javascript">console.log(apple)
+console.log(bannana * 2)
+//console output:
+    > "red"
+    > 8</code></pre>
+            <p>Another concept shared by many high level languages is that of
+            <strong>global</strong> and <strong>local</strong> variables. In
+            JavaScript, if you declare a variable inside a function, it's local,
+            but if you declare it outside of the function, it's global. Global
+            variables can be accessed anywhere in the code, but local can only
+            be accessed from within the function they were created.</p>
+            <p>See the example to the left for a demonstration</p>
+        </div>
+        <div class="tab Tab2">
+            <h3>Lists</h3>
+            <p>Lists in JavaScript (aka Arrays) are similar to python but different
+            to Java, in that they can contain any number of any sort of item. For
+            example:</p>
+            <pre class="noselect"><code class="javascript">var my_list = [1,2,3,"a","b",["inception","bwaaa"]]
+</code></pre>
+            <p>To get at the data in the list we do the following:</p>
+            <pre class="noselect"><code class="javascript">console.log(my_list[0])
+    > 1
+console.log(my_list[4])
+    > "b"
+console.log(my_list[5][1])
+    > "bwaaa"
+</code></pre>
+            <p>To put data into the list we use <span>list.push(x)</span>:</p>
+            <pre class="noselect"><code class="javascript">var numbers = [2,4,6]
+numbers.push(8)
+console.log(numbers)
+    > [2,4,6,8]
+</code></pre>
+            <p>And to remove it we use <span>list.splice(i,n)</span>. i is the
+            index to start at and n is the number of items to remove:</p>
+            <pre class="noselect"><code class="javascript">var numbers = [2,4,6,8,10,12]
+numbers.splice(3,1)
+console.log(numbers)
+    > [2,4,6,10,12]
+numbers.splice(1,3)
+console.log(numbers)
+    > [2,12]
+</code></pre>
+        </div>
+        <div class="tab Tab3">
+            <h3>Loops</h3>
+        </div>
     </div>
     <div id="header"></div>
 </body>
