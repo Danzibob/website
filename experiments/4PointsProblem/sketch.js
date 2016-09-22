@@ -37,8 +37,8 @@ function mouseReleased(){
 function calcPixels(){
 	var maxSum = dist(0,0,width,height)*4
 	vals = []
-	for(var x = 0; x < width; x++){
-		for(var y = 0; y < height; y++){
+	for(var y = 0; y < height; y++){
+		for(var x = 0; x < width; x++){
 			var sum = 0
 			for(p in points){
 				sum += dist(x,y,points[p].x, points[p].y)
@@ -62,7 +62,7 @@ function calcPixels(){
 	var mindex = vals.indexOf(minB)
 	stroke(0)
 	strokeWeight(16)
-	point(int(mindex/width),mindex%width)
+	point(mindex%width,int(mindex/width))
 	solve()
 }
 function count(l,item){
