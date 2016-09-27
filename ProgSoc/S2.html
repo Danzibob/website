@@ -14,7 +14,6 @@
     <title>ProgSoc</title>
 </head>
 
-
 <body>
     <a href="../index.html" id="main_header">
         <h1>Variables, Lists, and Loops</h1>
@@ -48,12 +47,38 @@ function draw(){
         </div>
         <div class="tab Tab2">
             <pre class="noselect"><code class="javascript"><!--
-!--></code></pre>
+!-->var points = []
+function setup(){
+    createCavnas(400,200)
+    background(255)
+}
+function draw(){
+    textSize(20)
+    text(String(points),10,10,width-10, height-10)
+}
+function mousePressed(){
+    points.push([mouseX, mouseY])
+}
+</code></pre>
         <div id="S2-2"></div>
         </div>
         <div class="tab Tab3">
             <pre class="noselect"><code class="javascript"><!--
-!--></code></pre>
+!-->var points = []
+function setup(){
+    createCavnas(400,200)
+    stroke(255,0,0);
+    colorMode(HSB)
+}
+function draw(){
+    for(var i = 0; i < points.length; i++){
+        point(points[i].x, points[i].y)
+    }
+}
+function mousePressed(){
+    points.push(createVector(mouseX, mouseY))
+    if(points.length > 10){points.splice(0,1);}
+}</code></pre>
         <div id="S2-3"></div>
         </div>
     </div>
@@ -62,7 +87,7 @@ function draw(){
         <div class="button_holder" style="margin-top:10px;">
             <div class="button" onclick="showTab(1)">Variables</div>
             <div class="button" onclick="showTab(2)">Lists</div>
-            <div class="button" onclick="showTab(3)">Shapes</div>
+            <div class="button" onclick="showTab(3)">Loops</div>
         </div>
         <div class="tab Tab1">
             <h3>Variables</h3>
@@ -120,6 +145,27 @@ console.log(numbers)
         </div>
         <div class="tab Tab3">
             <h3>Loops</h3>
+            <p>One of the most common uses of loops is to perform an operation
+                on every element in a list. The syntax of a for loop in JavaScript
+                is as follows:</p>
+            <pre class="noselect"><code class="javascript">for(var i = 0; i < 10; i++){
+    //do stuff
+}</code></pre>
+            <p>This may look a little daunting at first, but this syntax can be
+                broken down into simpler pieces. Firstly <span>var i = 0</span>
+                creates a new variable called i. The next line is the condition
+                to see if the loop should keep running.</p>
+                <pre class="noselect"><code class="javascript"><!--
+!-->if(i < 10){
+    //keep running
+} else {
+    //end the loop
+}
+//spoiler this is how if statements work
+</code></pre>
+                <p>Finally the i++ simply adds 1 to i at the end of each <i>iteration</i>.</p>
+                <p>The semicolons seperate each section so they are treated as
+                    different lines of code</p>
         </div>
     </div>
     <div id="header"></div>
