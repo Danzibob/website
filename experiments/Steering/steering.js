@@ -109,7 +109,11 @@ Predator.prototype = Object.create(Agent.prototype)
 Predator.prototype.constructor = Agent
 
 var prey = []
-var pred, sliderA
+var pred, sliderA,nom
+function preload() {
+  nom = loadSound('nom.mp3');
+}
+
 function setup(){
     createCanvas(400,400).parent("cnv_holder")
     sliderA = createSlider(0,200,40,10).parent("cnv_holder")
@@ -138,6 +142,9 @@ function draw(){
     }
     hitlist.sort()
     hitlist.reverse()
+    if(hitlist.length > 0){
+        nom.play()
+    }
     for(i in hitlist){
         prey.splice(hitlist[i],1)
         pred.maxSpeed += 0.1
