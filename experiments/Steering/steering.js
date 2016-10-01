@@ -139,6 +139,8 @@ function draw(){
     hitlist.reverse()
     for(i in hitlist){
         prey.splice(hitlist[i],1)
+        pred.maxSpeed += 0.1
+        pred.maxForce += 0.01
     }
     pred.update()
     pred.draw()
