@@ -38,10 +38,10 @@ var Agent = function(pos,t){
         // if(this.pos.x < 0     ){this.pos.x += width}
         // if(this.pos.y > height){this.pos.y -= height}
         // if(this.pos.y < 0     ){this.pos.y += height}
-        if(this.pos.x > width-5 ){this.acc.x = -0.4; redo = true}
-        if(this.pos.x < 5       ){this.acc.x = 0.4; redo = true}
-        if(this.pos.y > height-5){this.acc.y = -0.4; redo = true}
-        if(this.pos.y < 5       ){this.acc.y = 0.4; redo = true}
+        if(this.pos.x > width-5 ){this.acc.x = -this.maxForce*8; redo = true}
+        if(this.pos.x < 5       ){this.acc.x = this.maxForce*8; redo = true}
+        if(this.pos.y > height-5){this.acc.y = -this.maxForce*8; redo = true}
+        if(this.pos.y < 5       ){this.acc.y = this.maxForce*8; redo = true}
         if(redo){
             this.vel.add(this.acc)
             this.acc.mult(0)
@@ -109,9 +109,10 @@ Predator.prototype = Object.create(Agent.prototype)
 Predator.prototype.constructor = Agent
 
 var prey = []
-var pred
+var pred, sliderA
 function setup(){
     createCanvas(400,400).parent("cnv_holder")
+    sliderA = createSlider(0,200,40,10).parent("cnv_holder")
     colorMode(HSB)
     for(var i = 0; i < 50; i++){
         prey.push(new Prey())
@@ -141,6 +142,8 @@ function draw(){
         prey.splice(hitlist[i],1)
         pred.maxSpeed += 0.1
         pred.maxForce += 0.01
+    }
+    while(sliderA.value() > prey.length){
         prey.push(new Prey())
     }
     pred.update()
