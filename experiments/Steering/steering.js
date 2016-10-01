@@ -9,6 +9,7 @@ function setup(){
     createCanvas(400,400).parent("cnv_holder")
     sliderA = createSlider(0,500,40,10).parent("pop_slider")
     sliderB = createSlider(0,1,0.4,0.001).parent("snd_slider")
+    sliderC = createSlider(5,50,50,1).parent("spd_slider")
     p = createP("").parent("text")
     colorMode(HSB)
     for(var i = 0; i < 50; i++){
@@ -44,7 +45,11 @@ function draw(){
     }
     for(i in hitlist){
         prey.splice(hitlist[i],1)
-        pred.maxSpeed += 0.05
+        if(pred.maxSpeed > sliderC.value()){
+            pred.maxSpeed = sliderC.value()
+        } else {
+            pred.maxSpeed += 0.05
+        }
         pred.maxForce += 0.02
     }
     while(sliderA.value() > prey.length){
