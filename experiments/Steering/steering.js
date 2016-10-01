@@ -113,7 +113,7 @@ var pred
 function setup(){
     createCanvas(400,400).parent("cnv_holder")
     colorMode(HSB)
-    for(var i = 0; i < 20; i++){
+    for(var i = 0; i < 50; i++){
         prey.push(new Prey())
     }
     pred = new Predator()
@@ -141,6 +141,7 @@ function draw(){
         prey.splice(hitlist[i],1)
         pred.maxSpeed += 0.1
         pred.maxForce += 0.01
+        prey.push(new Prey())
     }
     pred.update()
     pred.draw()
