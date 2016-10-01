@@ -38,10 +38,14 @@ var Agent = function(pos,t){
         // if(this.pos.x < 0     ){this.pos.x += width}
         // if(this.pos.y > height){this.pos.y -= height}
         // if(this.pos.y < 0     ){this.pos.y += height}
-        if(this.pos.x > width-5 ){this.acc.x = -this.maxForce*8; redo = true}
-        if(this.pos.x < 5       ){this.acc.x = this.maxForce*8; redo = true}
-        if(this.pos.y > height-5){this.acc.y = -this.maxForce*8; redo = true}
-        if(this.pos.y < 5       ){this.acc.y = this.maxForce*8; redo = true}
+        // if(this.pos.x > width-5 ){this.acc.x = -this.maxForce*8; redo = true}
+        // if(this.pos.x < 5       ){this.acc.x = this.maxForce*8; redo = true}
+        // if(this.pos.y > height-5){this.acc.y = -this.maxForce*8; redo = true}
+        // if(this.pos.y < 5       ){this.acc.y = this.maxForce*8; redo = true}
+        if(this.pos.x*this.pos.x + this.pos.y*this.pos.y > 20000){
+            this.acc.x = -this.pos.x/400
+            this.acc.y = -this.pos.y/400
+        }
         if(redo){
             this.vel.add(this.acc)
             this.acc.mult(0)
@@ -52,7 +56,7 @@ var Agent = function(pos,t){
 }
 
 var Prey = function(){
-    var p = createVector(random(width), random(height))
+    var p = createVector(random(width)-width/2, random(height)-height/2)
     Agent.call(this,p,200)
     this.hue = random(360)
     this.idle = function(){
@@ -79,7 +83,7 @@ Prey.prototype = Object.create(Agent.prototype)
 Prey.prototype.constructor = Agent
 
 var Predator = function(){
-    var p = createVector(random(width), random(height))
+    var p = createVector(random(width)-width/2, random(height)-height/2)
     Agent.call(this,p,200)
     this.hue = random(360)
     this.idle = function(){
@@ -109,14 +113,17 @@ Predator.prototype = Object.create(Agent.prototype)
 Predator.prototype.constructor = Agent
 
 var prey = []
-var pred, sliderA,nom
+var killCount = 0
+var pred, sliderA, nom, sliderB, p
 function preload() {
   nom = loadSound('nom.mp3');
 }
 
 function setup(){
     createCanvas(400,400).parent("cnv_holder")
-    sliderA = createSlider(0,200,40,10).parent("cnv_holder")
+    sliderA = createSlider(0,200,40,10).parent("sliders")
+    sliderB = createSlider(0,1,0.4,0.001).parent("sliders")
+    p = createP("").parent("text")
     colorMode(HSB)
     for(var i = 0; i < 50; i++){
         prey.push(new Prey())
@@ -125,7 +132,10 @@ function setup(){
 }
 
 function draw(){
+    translate(width/2, height/2)
     background(0)
+    ellipse(0,0,400,400)
+    nom.setVolume(sliderB.value())
     var minD = 1000000
     var mini = "NA"
     var hitlist = []
@@ -144,6 +154,7 @@ function draw(){
     hitlist.reverse()
     if(hitlist.length > 0){
         nom.play()
+        killCount += hitlist.length
     }
     for(i in hitlist){
         prey.splice(hitlist[i],1)
@@ -155,6 +166,10 @@ function draw(){
     }
     pred.update()
     pred.draw()
+    if(frameCount % 60 == 0){
+        p.html(killCount)
+        killCount = 0
+    }
 }
 
 function distSq(v1,v2){
