@@ -64,13 +64,13 @@ var Prey = function(){
         rotate(this.vel.heading());
         stroke(this.hue,100,100)
         strokeWeight(5)
-        line(0,0,10,0)
+        line(-10,0,0,0)
         strokeWeight(3)
         stroke(100)
-        point(10,0)
+        point(0,0)
         strokeWeight(2)
         stroke(0)
-        point(11,0)
+        point(1,0)
         pop()
     }
 
@@ -95,13 +95,13 @@ var Predator = function(){
         rotate(this.vel.heading());
         stroke(this.hue,100,100)
         strokeWeight(8)
-        line(0,0,16,0)
+        line(-16,0,0,0)
         strokeWeight(6)
         stroke(100)
-        point(16,0)
+        point(0,0)
         strokeWeight(4)
         stroke(255,0,0)
-        point(18,0)
+        point(2,0)
         pop()
     }
 }
@@ -123,36 +123,30 @@ function draw(){
     background(0)
     var minD = 1000000
     var mini = "NA"
+    var hitlist = []
     for(i in prey){
         prey[i].flee(pred.pos.x, pred.pos.y)
         prey[i].update()
         prey[i].draw()
         var d = distSq(pred.pos,prey[i].pos)
-        if(d < minD){
-            minD = d
-            mini = i
-        }
+        if(d < minD){minD = d;mini = i}
+        if(d < 64){hitlist.push(i)}
     }
     if(mini != "NA"){
         pred.follow(prey[mini].pos.x,prey[mini].pos.y)
+    }
+    hitlist.sort()
+    hitlist.reverse()
+    for(i in hitlist){
+        prey.splice(hitlist[i],1)
     }
     pred.update()
     pred.draw()
 }
 
-function mousePressed(){
-    console.log("here")
-}
-function keyPressed(){
-    noLoop();
-}
-
-
-
-
 function distSq(v1,v2){
     a = v1.copy()
     b = v2.copy()
-    b.sub(b)
+    b.sub(a)
     return b.magSq()
 }
