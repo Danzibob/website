@@ -42,6 +42,7 @@ function draw(){
     if(hitlist.length > 0){
         nom.play()
         killCount += hitlist.length
+        pred.size += hitlist.length/10
     }
     for(i in hitlist){
         prey.splice(hitlist[i],1)

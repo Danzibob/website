@@ -86,6 +86,7 @@ var Predator = function(){
     var p = createVector(random(width)-width/2, random(height)-height/2)
     Agent.call(this,p,200)
     this.hue = random(360)
+    this.size = 16
     this.idle = function(){
         if(this.vel.x == 0){
             this.vel.x += random(0.05,0.15)
@@ -98,12 +99,12 @@ var Predator = function(){
         translate(this.pos.x, this.pos.y)
         rotate(this.vel.heading());
         stroke(this.hue,100,100)
-        strokeWeight(8)
-        line(-16,0,0,0)
-        strokeWeight(6)
+        strokeWeight(this.size/2)
+        line(-this.size,0,0,0)
+        strokeWeight(this.size/2 -2)
         stroke(100)
         point(0,0)
-        strokeWeight(4)
+        strokeWeight(this.size/3 )
         stroke(255,0,0)
         point(2,0)
         pop()
