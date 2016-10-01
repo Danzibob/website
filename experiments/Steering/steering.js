@@ -8,7 +8,7 @@ function preload() {
 function setup(){
     createCanvas(400,400).parent("cnv_holder")
     sliderA = createSlider(0,500,40,10).parent("pop_slider")
-    sliderB = createSlider(0,1,0.4,0.001).parent("snd_slider")
+    sliderB = createSlider(1,12,12,0.1).parent("trn_slider")
     sliderC = createSlider(5,50,50,1).parent("spd_slider")
     p = createP("").parent("text")
     colorMode(HSB)
@@ -22,7 +22,7 @@ function draw(){
     translate(width/2, height/2)
     background(0)
     ellipse(0,0,400,400)
-    nom.setVolume(sliderB.value())
+    nom.setVolume(0.4)
     var minD = 1000000
     var mini = "NA"
     var hitlist = []
@@ -42,7 +42,7 @@ function draw(){
     if(hitlist.length > 0){
         nom.play()
         killCount += hitlist.length
-        pred.size += hitlist.length/10
+        pred.size += hitlist.length/100
     }
     for(i in hitlist){
         prey.splice(hitlist[i],1)
@@ -51,7 +51,11 @@ function draw(){
         } else {
             pred.maxSpeed += 0.05
         }
-        pred.maxForce += 0.02
+        if(pred.maxForce > sliderB.value()){
+            pred.maxForce = sliderB.value()
+        } else {
+            pred.maxForce += 0.01
+        }
     }
     while(sliderA.value() > prey.length){
         prey.push(new Prey())

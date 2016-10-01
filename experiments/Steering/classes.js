@@ -104,9 +104,9 @@ var Predator = function(){
         strokeWeight(this.size/2 -2)
         stroke(100)
         point(0,0)
-        strokeWeight(this.size/3 )
+        strokeWeight(this.size/4 )
         stroke(255,0,0)
-        point(2,0)
+        point(this.size/16,0)
         pop()
     }
 }
