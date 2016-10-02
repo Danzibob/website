@@ -11,11 +11,11 @@ function setup(){
     createCanvas(400,500).parent("cnv_holder")
     pop_slider = createSlider(0,500,2,1).parent("pop_slider")
     trn_slider = createSlider(0,12,12,0.01).parent("trn_slider")
-    spd_slider = createSlider(1,50,50,0.1).parent("spd_slider")
+    spd_slider = createSlider(1,25,25,0.1).parent("spd_slider")
     checkbox = createCheckbox("",true).parent("sound_button").style("zoom","3")
     p = createP("").parent("text")
     colorMode(HSB)
-    for(var i = 0; i < 50; i++){
+    for(var i = 0; i < 2; i++){
         prey.push(new Prey())
     }
     pred = new Predator()
@@ -49,7 +49,7 @@ function draw(){
         var age = frameCount/60
         $("#age").html(age)
         $("#eaten").html(totalKills)
-        $("#speed").html(nfc(pred.maxSpeed,2))
+        $("#speed").html(nfc(pred.maxSpeed*60,0))
         $("#force").html(nfc(pred.maxForce,2))
         $("#wps").html(killCount)
         $("#avg").html(nfc(totalKills/age,2))
