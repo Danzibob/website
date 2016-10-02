@@ -10,7 +10,9 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="/libraries/jquery-3.1.0.min.js" ></script>
     <script src="/styleNscripts/page.js"></script>
-    <script src="classes.js"></script>
+    <script src="Agent.js"></script>
+    <script src="Prey.js"></script>
+    <script src="Predator.js"></script>
     <script src="steering.js"></script>
     <title>Danny's Computing</title>
 </head>
@@ -23,25 +25,33 @@
     <div style="float:clear; height:60px; width:100%"></div>
     <div id="left_pane">
         <div id="cnv_holder" style="margin-top: 10px"></div>
+    </div>
+
+    <div id="right_pane">
+        <h3>Control Panel</h3>
         <table>
             <tr>
                 <th>Population</th>
                 <th>Max Turn</th>
                 <th>Max Speed</th>
+                <th>Sounds</th>
             </tr>
             <tr>
                 <td id="pop_slider"></td>
                 <td id="trn_slider"></td>
                 <td id="spd_slider"></td>
+                <td id="sound_button"></td>
             </tr>
         </table>
-        <div id="sliders" style="width:100%; "></div>
-        <div id="text" style="width:100%; "></div>
-    </div>
-
-    <div id="right_pane">
-        <h3>Subtitle</h3>
-        <p>content....</p>
+        <div id="text"></div>
+        <h3>Readout</h3>
+        <p>Time alive: <span id="age">0</span> s</p>
+        <p>Total eaten: <span id="eaten">0</span> worms</p>
+        <p>Speed: <span id="speed">0</span> px/s</p>
+        <p>Turning force: <span id="force">0</span> turniness</p>
+        <p>Eaten this second: <span id="wps">0</span> worms/s</p>
+        <p>Average per second: <span id="avg">0</span> worms/s</p>
+        <p>Max in a second: <span id="max">0</span> worms</p>
     </div>
     <div id="header"></div>
 </body>

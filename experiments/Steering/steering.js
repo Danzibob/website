@@ -1,15 +1,18 @@
 var prey = []
 var killCount = 0
+var totalKills = 0
+var maxKills = 0
 var pred, sliderA, nom, sliderB, p
 function preload() {
   nom = loadSound('nom.mp3');
 }
 
 function setup(){
-    createCanvas(400,400).parent("cnv_holder")
-    sliderA = createSlider(0,500,40,10).parent("pop_slider")
-    sliderB = createSlider(1,12,12,0.1).parent("trn_slider")
-    sliderC = createSlider(5,50,50,1).parent("spd_slider")
+    createCanvas(400,500).parent("cnv_holder")
+    pop_slider = createSlider(0,500,2,1).parent("pop_slider")
+    trn_slider = createSlider(0,12,12,0.01).parent("trn_slider")
+    spd_slider = createSlider(1,50,50,0.1).parent("spd_slider")
+    checkbox = createCheckbox("",true).parent("sound_button").style("zoom","3")
     p = createP("").parent("text")
     colorMode(HSB)
     for(var i = 0; i < 50; i++){
@@ -19,51 +22,38 @@ function setup(){
 }
 
 function draw(){
-    translate(width/2, height/2)
+    //setup
+    translate(width/2, 200)
     background(0)
     ellipse(0,0,400,400)
     nom.setVolume(0.4)
-    var minD = 1000000
-    var mini = "NA"
-    var hitlist = []
-    for(i in prey){
-        prey[i].flee(pred.pos.x, pred.pos.y)
-        prey[i].update()
-        prey[i].draw()
-        var d = distSq(pred.pos,prey[i].pos)
-        if(d < minD){minD = d;mini = i}
-        if(d < 64){hitlist.push(i)}
-    }
-    if(mini != "NA"){
-        pred.follow(prey[mini].pos.x,prey[mini].pos.y)
-    }
-    hitlist.sort()
-    hitlist.reverse()
-    if(hitlist.length > 0){
-        nom.play()
-        killCount += hitlist.length
-        pred.size += hitlist.length/100
-    }
-    for(i in hitlist){
-        prey.splice(hitlist[i],1)
-        if(pred.maxSpeed > sliderC.value()){
-            pred.maxSpeed = sliderC.value()
-        } else {
-            pred.maxSpeed += 0.05
-        }
-        if(pred.maxForce > sliderB.value()){
-            pred.maxForce = sliderB.value()
-        } else {
-            pred.maxForce += 0.01
-        }
-    }
-    while(sliderA.value() > prey.length){
+    //simulate Predator
+    pred.ai()
+    pred.update()
+    //respawn worms
+    while(pop_slider.value() > prey.length){
         prey.push(new Prey())
     }
-    pred.update()
+    //simulate and draw worms
+    for(i in prey){
+        prey[i].ai()
+        prey[i].update()
+        prey[i].draw()
+    }
+    //draw predator
     pred.draw()
-    if(frameCount % 60 == 0){
-        p.html(killCount)
+    //update readout
+    if(frameCount % 60 == 0 && frameCount != 0){
+        if(killCount > maxKills){maxKills = killCount}
+        totalKills += killCount
+        var age = frameCount/60
+        $("#age").html(age)
+        $("#eaten").html(totalKills)
+        $("#speed").html(nfc(pred.maxSpeed,2))
+        $("#force").html(nfc(pred.maxForce,2))
+        $("#wps").html(killCount)
+        $("#avg").html(nfc(totalKills/age,2))
+        $("#max").html(maxKills)
         killCount = 0
     }
 }
