@@ -72,12 +72,13 @@ function setup(){
 }
 function draw(){
     for(var i = 0; i < points.length; i++){
+        points[i].x += p.random(-2,2)
+        points[i].y += p.random(-2,2)
         point(points[i].x, points[i].y)
     }
 }
 function mousePressed(){
     points.push(createVector(mouseX, mouseY))
-    if(points.length > 10){points.splice(0,1);}
 }</code></pre>
         <div id="S2-3"></div>
         </div>

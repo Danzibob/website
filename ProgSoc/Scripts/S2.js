@@ -43,12 +43,13 @@ var s = function(p){
     p.draw = function(){
         p.background(255);
         for(var i = 0; i < points.length; i++){
+            points[i].x += p.random(-2,2)
+            points[i].y += p.random(-2,2)
             p.point(points[i].x, points[i].y)
         }
     }
     p.mousePressed = function(){
         points.push(p.createVector(p.mouseX, p.mouseY))
-        if(points.length > 10){points.splice(0,1);}
     }
 }
 var inst2 = new p5(s,"S2-3");

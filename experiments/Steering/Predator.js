@@ -9,7 +9,7 @@ var Predator = function(){
         var rnd = frameCount/40 + this.hue
         var v = p5.Vector.fromAngle(noise(rnd)*TWO_PI)
         var p = this.pos.copy()
-        p.normalize()
+        p.mult(1/150)
         v.sub(p)
         v.mult(this.maxForce/2)
         this.acc.add(v)

@@ -10,30 +10,55 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="../libraries/jquery-3.1.0.min.js" ></script>
     <script src="../styleNscripts/page.js"></script>
-    <title>Danny's Computing</title>
+    <script src="Scripts/S2.js"></script>
+    <title>ProgSoc</title>
 </head>
-
 
 <body>
     <a href="../index.html" id="main_header">
-        <h1>Placeholder Title</h1>
+        <h1>IF, ELSE and Math</h1>
     </a>
     <div style="float:clear; height:60px; width:100%"></div>
     <div id="left_pane">
-        <h3>Insert content here</h3>
-        <pre><code class="javascript"><!--
-!-->var basic = 16;
-var Example = function(){
-    this.isA = "Demonstration";
-}
-for(var some; some < basic; some++){
-    console.log("Syntax highlighting");
-}</code></pre>
+        <div class="tab Tab1">
+            <pre class="noselect"><code class="javascript"><!--
+!-->
+</code></pre>
+        <div id="S2-1"></div>
+        <div id="slider_holder"></div>
+        </div>
+        <div class="tab Tab2">
+            <pre class="noselect"><code class="javascript"><!--
+!-->
+</code></pre>
+        <div id="S2-2"></div>
+        </div>
+        <div class="tab Tab3">
+            <pre class="noselect"><code class="javascript"><!--
+!-->
+</code></pre>
+        <div id="S2-3"></div>
+        </div>
     </div>
 
     <div id="right_pane">
-        <h3>Subtitle</h3>
-        <p>content....</p>
+        <div class="button_holder" style="margin-top:10px;">
+            <div class="button" onclick="showTab(1)">Variables</div>
+            <div class="button" onclick="showTab(2)">Lists</div>
+            <div class="button" onclick="showTab(3)">Loops</div>
+        </div>
+        <div class="tab Tab1">
+            <h3>IF Statements</h3>
+
+        </div>
+        <div class="tab Tab2">
+            <h3>Lists</h3>
+
+        </div>
+        <div class="tab Tab3">
+            <h3>Loops</h3>
+
+        </div>
     </div>
     <div id="header"></div>
 </body>
