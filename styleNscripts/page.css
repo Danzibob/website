@@ -184,3 +184,6 @@ a li{
     width:auto;
     min-height:90%;
 }
+input[type="checkbox"]{
+    zoom: 2;
+}

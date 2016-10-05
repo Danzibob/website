@@ -11,7 +11,6 @@ var s = function(p){
     }
 }
 var inst1 = new p5(s,"demo-1");
-
 var s = function(p){
     p.setup = function(){
         p.createCanvas(600,400)
@@ -26,6 +25,12 @@ var s = function(p){
     }
 }
 var inst2 = new p5(s,"demo-2");
+
+
+
+
+
+
 
 var s = function(p){
     var x
