@@ -2,8 +2,9 @@ Graph = function(nodes = [], connections = {}){
     this.V = nodes
     this.E = connections
     this.nodes = {}
-
+    this.isSetup = false
     this.setupDrawing = function(){
+        this.isSetup = true
         this.draw_nodes = {}
         for(var n in this.V){
             this.draw_nodes[this.V[n]] = new Node(createVector(random(width), random(height)),this.V[n])
@@ -14,8 +15,8 @@ Graph = function(nodes = [], connections = {}){
         }
     }
 
-    this.show = function(strs = false){
-        for(var e in this.E){this.draw_edges[e].show(strs)}
+    this.show = function(strs = false, lbls = false){
+        for(var e in this.E){this.draw_edges[e].show(strs,lbls)}
         for(var n in this.V){this.draw_nodes[this.V[n]].show()}
     }
 
@@ -54,8 +55,11 @@ Graph = function(nodes = [], connections = {}){
     }
 
     this.addV = function(name){
-        V.push(name)
+        this.V.push(name)
         this.nodes[name] = []
+        if(this.isSetup){
+            this.draw_nodes[name] = new Node(createVector(mouseX, mouseY),name)
+        }
     }
 
     this.removeV = function(name){
@@ -69,12 +73,15 @@ Graph = function(nodes = [], connections = {}){
     }
 
     this.connect = function(v1, v2, weight = 1){
-        var p = [v1,v2].sort().join()
+        var p = [v1,v2].sort().join("")
         if(!(p in this.E)){
             this.E[p] = weight
             this.nodes[v1][v2] = weight
             this.nodes[v2][v1] = weight
-            // return true
+            if(this.isSetup){
+                this.draw_edges[p] = new Edge(this.draw_nodes[v1], this.draw_nodes[v2], weight)
+            }
+            return true
         }
         return false
     }

@@ -41,13 +41,25 @@ var Edge = function(a,b,base_length, force=0.001){
         v.mult(-1)
         this.b.applyForce(v)
     }
-    this.show = function(stress = true){
+    this.show = function(stress = true, labels = true){
         if(stress){
             var v = p5.Vector.sub(this.b.pos, this.a.pos)
             var x = v.mag()-this.base_len*scl
             var tension = map(x,-100,100,0,200)
             stroke(tension,60,100)
         } else {stroke(100)}
+        if(labels){
+            push()
+            translate((a.pos.x+b.pos.x)/2,(a.pos.y+b.pos.y)/2)
+            var r = atan2((a.pos.y-b.pos.y),(a.pos.x-b.pos.x))
+            if(abs(r) > HALF_PI){r += PI}
+            rotate(r)
+            fill(100)
+            noStroke()
+            textSize(18)
+            text(nfc(this.base_len,0), -10, -5)
+            pop()
+        }
         strokeWeight(3)
         line(a.pos.x, a.pos.y, b.pos.x, b.pos.y)
     }
