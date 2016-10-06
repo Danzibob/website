@@ -4,14 +4,22 @@ var Node = function(pos, name, size = 24, hue = false){
     this.pos = pos
     this.vel = createVector(0,0)
     this.acc = createVector(0,0)
-    this.show = function(){
+    this.name = name
+    this.show = function(hlght){
         noStroke()
+        if(this.name in hlght.nodes){
+            fill(hlght.nodes[this.name])
+            ellipse(this.pos.x, this.pos.y, this.size+6, this.size+6)
+        }
+        stroke(0)
+        strokeWeight(1)
         fill(this.hue, 100, 100)
         textFont(fontMono)
         textSize(this.size/1.4)
         ellipse(this.pos.x, this.pos.y, this.size, this.size)
         fill(0)
-        text(name, this.pos.x-(name.length*this.size/4), this.pos.y+(this.size/4))
+        noStroke()
+        text(this.name, this.pos.x-(this.name.length*this.size/4), this.pos.y+(this.size/4))
     }
     this.applyForce = function(vect){this.acc.add(vect)}
     this.update = function(dmp){
@@ -26,6 +34,7 @@ var Edge = function(a,b,base_length, force=0.001){
     this.k = force
     this.a = a
     this.b = b
+    this.name = [a.name,b.name].sort().join("")
     this.applyForce = function(){
         var v = p5.Vector.sub(this.b.pos, this.a.pos)
         var x = v.mag()-this.base_len*scl
@@ -41,7 +50,12 @@ var Edge = function(a,b,base_length, force=0.001){
         v.mult(-1)
         this.b.applyForce(v)
     }
-    this.show = function(stress = true, labels = true){
+    this.show = function(hlght,stress = true, labels = true){
+        if(this.name in hlght.edges){
+            strokeWeight(6)
+            stroke(hlght.edges[this.name])
+            line(a.pos.x, a.pos.y, b.pos.x, b.pos.y)
+        }
         if(stress){
             var v = p5.Vector.sub(this.b.pos, this.a.pos)
             var x = v.mag()-this.base_len*scl

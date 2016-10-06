@@ -2,14 +2,21 @@ var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 var docMX=0
 var docMY=0
 var physics, stress, labels, scaler, damping, settle, follow,drawmode,newgraph
-var newA, newB
+var newA, newB, djSelA, djSelB
 var settling = false
 var grabbed = false
 var G = f
 var tmp = false
 var sttl = 0
+var running = false
 function preload(){
     fontMono = loadFont("../styleNscripts/Fonts/DroidSansMono/DroidSansMono.ttf")
+    String.prototype.format = function() {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) {
+            return args[number]
+        })
+    }
 }
 function setup(){
     createCanvas(500,500).parent("sketch")
@@ -22,11 +29,22 @@ function setup(){
     damping = createSlider(0.95,0.995,0.97,0.001).parent("Damping")
     drawmode = createCheckbox().parent("DrawMode")
     newgraph = createButton("New Graph").parent("NewGraph").mousePressed(newG)
+    djSelA  = createSelect().parent("djk")
+    djSelB  = createSelect().parent("djk")
+    for(n in G.V){
+        djSelA.option(G.V[n])
+        djSelB.option(G.V[n])
+    }
     G.setupDrawing()
     colorMode(HSB)
 }
 
 function draw(){
+    if(running && frameCount % 60 == 0){
+        if(running == "dijkstraEnd"){G.dijkstraEnd(); running=false}
+        if(running == "dijkstraMain"){if(G.dijkstraMain()){running="dijkstraEnd"}}
+        if(running == "dijkstraSetup"){G.dijkstraSetup(djSelA.value(),djSelB.value()); console.log("ran setup"); running="dijkstraMain"}
+    }
     if(settling > -1){settling++; ctr()}
     if(settling > 20){
         var totx = 0
@@ -64,7 +82,10 @@ function mousePressed(){
         }
     }
     if(drawmode.checked() && !grabbed && bounds()){
-        G.addV(alphabet[G.V.length])
+        var nam = alphabet[G.V.length]
+        G.addV(nam)
+        djSelA.option(nam)
+        djSelB.option(nam)
     }
 }
 
@@ -92,7 +113,7 @@ function mouseReleased(){
                     })
                     .keyup(function (e) {
                         if(e.keyCode == 13){
-                            G.connect(newA,newB,$("#weightInput").val())
+                            G.connect(newA,newB,parseInt($("#weightInput").val()))
                             $("#weightInput").remove()
                         }
                     }))
@@ -123,3 +144,12 @@ function mouseMoved(){
     docMX = mouseX + offset.left
     docMY = mouseY + offset.top
 }
+function cnsl(text){
+    var str = $("#Console").html()
+    console.log(str)
+    str += text + "\n"
+    console.log(str)
+    $("#Console").html(str)
+    return true
+}
+function clrcnsl(){$("#Console").html("")}

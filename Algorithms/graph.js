@@ -3,6 +3,11 @@ Graph = function(nodes = [], connections = {}){
     this.E = connections
     this.nodes = {}
     this.isSetup = false
+    this.highlighted = {
+        nodes: {},
+        edges: {}
+    }
+    this.tmp = {}
     this.setupDrawing = function(){
         this.isSetup = true
         this.draw_nodes = {}
@@ -16,8 +21,8 @@ Graph = function(nodes = [], connections = {}){
     }
 
     this.show = function(strs = false, lbls = false){
-        for(var e in this.E){this.draw_edges[e].show(strs,lbls)}
-        for(var n in this.V){this.draw_nodes[this.V[n]].show()}
+        for(var e in this.E){this.draw_edges[e].show(this.highlighted,strs,lbls)}
+        for(var n in this.V){this.draw_nodes[this.V[n]].show(this.highlighted)}
     }
 
     this.simulate = function(dmp=0.98){
@@ -128,63 +133,85 @@ Graph = function(nodes = [], connections = {}){
         return {tree: MST, graph: tree}
     }
 
-    this.dijkstra = function(a,b){
-        var done = []
-        var table = {}
-        var current = a
-        // set table vals for start node
-        table[a] = {dist: 0, prnt: false}
-        // until every node is visited
-        while(done.length < this.V.length){
-            console.log("Using Node: ", current)
-            if(current === undefined){console.log("out of nodes"); break}
-            // for each connected node to current node
-            for(var node in this.nodes[current]){
-                // if node isn't in table, or dist is greater than could be
-                if(!(node in table) || table[node].dist > table[current].dist+this.nodes[current][node]){
-                    // text output
+    this.dijkstraSetup = function(a,b){
+        this.tmp = {}
+        this.tmp.a = a
+        this.tmp.b = b
+        this.tmp.done = []
+        this.tmp.edges_done = []
+        this.tmp.table = {}
+        this.tmp.current = a
+        cnsl("Editing node {0} from {1} to {2}".format(this.tmp.current,undefined,0))
+        this.tmp.table[a] = {dist: 0, prnt: "-"}
+        cnsl(tableString(Object.keys(this.tmp.table).sort(),this.tmp.table))
+    }
+    this.dijkstraMain = function(){
+        if(this.tmp.done.length < this.V.length){
+            if(this.tmp.current === undefined){console.log("out of nodes"); return false}
+
+            cnsl("Using Node: {0}".format(this.tmp.current))
+            for(i in this.tmp.done){
+                this.highlighted.nodes[this.tmp.done[i]] = color(120,50,100)
+            }
+            for(i in this.tmp.edges_done){
+                delete this.highlighted.edges[this.tmp.edges_done[i]]
+            }
+            this.highlighted.nodes[this.tmp.current] = color(0,0,100)
+            for(var node in this.nodes[this.tmp.current]){
+                var edgeName = [this.tmp.current,node].sort().join("")
+                this.highlighted.edges[edgeName] = color(30,50,100)
+                this.tmp.edges_done.push(edgeName)
+                if(!(node in this.tmp.table) || this.tmp.table[node].dist > this.tmp.table[this.tmp.current].dist+this.nodes[this.tmp.current][node]){
                     var dst = undefined
-                    try{dst = table[node].dist} catch(err) {}
-                    console.log("Editing node ", node, " from ", dst , " to ", table[current].dist+this.nodes[current][node])
-                    //update table values for node
-                    table[node] = {
-                        dist:table[current].dist+this.nodes[current][node],
-                        prnt:current
+                    try{dst = this.tmp.table[node].dist} catch(err) {}
+                    cnsl("    Editing node {0} from {1} to {2}".format(
+                        node,dst,this.tmp.table[this.tmp.current].dist+this.nodes[this.tmp.current][node]))
+                    this.tmp.table[node] = {
+                        dist:this.tmp.table[this.tmp.current].dist+this.nodes[this.tmp.current][node],
+                        prnt:this.tmp.current
                     }
                 }
             }
-            // add current to visted list
-            done.push(current)
-            // find minimum distance unvisited node
+            this.tmp.done.push(this.tmp.current)
             var min = Infinity
             var minpos = undefined
-            for(var prop in table){
-                if(done.indexOf(prop) == -1 && (min === undefined || table[prop].dist < min)){
-                    min = table[prop].dist
+            for(var prop in this.tmp.table){
+                if(this.tmp.done.indexOf(prop) == -1 && (min === undefined || this.tmp.table[prop].dist < min)){
+                    min = this.tmp.table[prop].dist
                     minpos = prop
                 }
             }
-            // make that the current node
-            current = minpos
-        }
-        // if target wasnt reached
-        if(done.indexOf(b) == -1){
+            this.tmp.current = minpos
+            cnsl(tableString(Object.keys(this.tmp.table).sort(),this.tmp.table))
             return false
-        // if it was reached
+        } else {return true}
+    }
+    this.dijkstraEnd = function(){
+        for(i in this.tmp.edges_done){
+            delete this.highlighted.edges[this.tmp.edges_done[i]]
+        }
+        for(i in this.tmp.done){
+            this.highlighted.nodes[this.tmp.done[i]] = color(120,50,100)
+        }
+        if(this.tmp.done.indexOf(this.tmp.b) == -1){
+            cnsl("Target node wasn't reached")
+            return false
         } else {
-            // backtrack through parents to start node
-            var path = [b]
-            while(path[path.length-1] != false){
-                path.push(table[path[path.length-1]].prnt)
+            var path = [this.tmp.b]
+            while(path[path.length-1] != "-"){
+                path.push(this.tmp.table[path[path.length-1]].prnt)
             }
             path.splice(path.length-1,1)
             path.reverse()
-            return {
-                path: path,
-                dist: table[b].dist
+            cnsl("Best distance was {0}\nBest path was {1}".format(
+            this.tmp.table[this.tmp.b].dist, path.join("->")))
+            for(var i = 0; i < path.length -1; i++){
+                var p = [path[i],path[i+1]].sort().join("")
+                this.highlighted.edges[this.tmp.edges_done[i]] = color(120,50,100)
             }
         }
     }
+
 }
 
 function minInObject(obj){
@@ -207,4 +234,22 @@ function maxInObject(obj){
         }
     }
     return maxpos
+}
+
+
+function tableString(vs,obj){
+    var str = ""
+    str += "\n+ Node + Min Dist + Parent +\n"
+    for(i in vs){
+        str += "|   {0}  |{1}|{2}|\n".format(
+            vs[i], pad(obj[vs[i]].dist,10),pad(obj[vs[i]].prnt,8))
+    }
+    str += "+ -  - + - -  - - + - -- - +\n"
+    return str
+}
+
+function pad(str,l){
+    str = String(str)
+    var space = l-str.length
+    return " ".repeat(floor(space/2)) + str + " ".repeat(ceil(space/2))
 }
