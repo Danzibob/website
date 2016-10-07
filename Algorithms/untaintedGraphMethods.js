@@ -53,3 +53,46 @@ this.dijkstra = function(a,b,show=false){
         }
     }
 }
+
+
+this.kruskal = function(){
+    var connected = []
+    var tree = new Graph(this.V)
+    var MST = []
+    tree.process()
+    console.log(tree)
+    var E = this.E
+    var edges = Object.keys(this.E).sort(function(a,b){return E[b]-E[a]})
+    var done = false
+    while(connected.length == 0 || connected[0].length < this.V.length){
+        E = edges.pop()
+        if(E === undefined){console.log("out of edges"); return false}
+        console.log("Trying edge ", E)
+        if(tree.dijkstra(E[0],E[1]) === false){
+            console.log("Edge does not make a cycle, adding to tree")
+            tree.connect(E[0],E[1],this.E[E])
+            var updated = false
+            var pushedTo = []
+            for(var i = 0; i < connected.length; i++){
+                if(connected[i].indexOf(E[0]) > -1 || connected[i].indexOf(E[1]) > -1){
+                    if(connected[i].indexOf(E[0]) == -1){connected[i].push(E[0])}
+                    if(connected[i].indexOf(E[1]) == -1){connected[i].push(E[1])}
+                    mst.push(E)
+                    pushedTo.push(i)
+                    updated = true
+                }
+            }
+            if(!updated){connected.push([E[0],E[1]])}
+            while(pushedTo.length > 1){
+                var idx = pushedTo.pop()
+                for(i in connected[idx]){
+                    if(connected[pushedTo[0]].indexOf(connected[idx][i]) == -1){
+                        connected[pushedTo[0]].push(connected[idx][i])
+                    }
+                }
+                connected.splice(idx,1)
+            }
+        } else {console.log("edge rejected")}
+    }
+    return {tree: MST, graph: tree}
+}

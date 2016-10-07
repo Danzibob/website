@@ -43,7 +43,10 @@ function draw(){
     if(running && frameCount % 60 == 0){
         if(running == "dijkstraEnd"){G.dijkstraEnd(); running=false}
         if(running == "dijkstraMain"){if(G.dijkstraMain()){running="dijkstraEnd"}}
-        if(running == "dijkstraSetup"){G.dijkstraSetup(djSelA.value(),djSelB.value()); console.log("ran setup"); running="dijkstraMain"}
+        if(running == "dijkstraSetup"){G.dijkstraSetup(djSelA.value(),djSelB.value()); running="dijkstraMain"}
+        if(running == "kruskalEnd"){G.kruskalEnd(); running=false}
+        if(running == "kruskalMain"){if(G.kruskalMain()){running="kruskalEnd"}}
+        if(running == "kruskalSetup"){G.kruskalSetup(); running="kruskalMain"}
     }
     if(settling > -1){settling++; ctr()}
     if(settling > 20){
@@ -62,7 +65,8 @@ function draw(){
         line(mouseX,mouseY,G.draw_nodes[grabbed].pos.x,G.draw_nodes[grabbed].pos.x)
     }
     scl = scaler.value()*scaler.value()
-    background(21)
+
+    background(51)
     if(physics.checked() && !drawmode.checked()){G.simulate(damping.value())}
     G.show(stress.checked(),labels.checked())
     if(tmp != false){
@@ -91,7 +95,6 @@ function mousePressed(){
 
 function mouseDragged(){
     if(grabbed && !drawmode.checked() && bounds()){
-        console.log(grabbed)
         G.draw_nodes[grabbed].pos.x = mouseX
         G.draw_nodes[grabbed].pos.y = mouseY
     }
@@ -145,11 +148,12 @@ function mouseMoved(){
     docMY = mouseY + offset.top
 }
 function cnsl(text){
-    var str = $("#Console").html()
-    console.log(str)
+    var Cnsl = $("#Console")
+    var str = Cnsl.html()
     str += text + "\n"
-    console.log(str)
-    $("#Console").html(str)
+    Cnsl.html(str)
+    var h = Cnsl[0].scrollHeight
+    Cnsl.scrollTop(h)
     return true
 }
 function clrcnsl(){$("#Console").html("")}

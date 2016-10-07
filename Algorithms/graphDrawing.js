@@ -52,7 +52,7 @@ var Edge = function(a,b,base_length, force=0.001){
     }
     this.show = function(hlght,stress = true, labels = true){
         if(this.name in hlght.edges){
-            strokeWeight(6)
+            strokeWeight(5)
             stroke(hlght.edges[this.name])
             line(a.pos.x, a.pos.y, b.pos.x, b.pos.y)
         }
@@ -61,7 +61,7 @@ var Edge = function(a,b,base_length, force=0.001){
             var x = v.mag()-this.base_len*scl
             var tension = map(x,-100,100,0,200)
             stroke(tension,60,100)
-        } else {stroke(100)}
+        } else {stroke(0)}
         if(labels){
             push()
             translate((a.pos.x+b.pos.x)/2,(a.pos.y+b.pos.y)/2)
