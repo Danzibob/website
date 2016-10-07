@@ -2,6 +2,10 @@
     font-family: DroidSans;
     src: url("../styleNscripts/Fonts/DroidSans/DroidSans.ttf");
 }
+@font-face {
+    font-family: DroidSansMono;
+    src: url("../styleNscripts/Fonts/DroidSansMono/DroidSansMono.ttf");
+}
 
 p, h1, h2, h3, h4, h5, a, td, th, div.button, li{
 	font-family: "DroidSans","Arial", sans-serif;
@@ -186,4 +190,12 @@ a li{
 }
 input[type="checkbox"]{
     zoom: 2;
+}
+button{
+    margin:auto;
+    font-family: DroidSansMono;
+}
+td {
+    text-align: center;
+    vertical-align: middle;
 }

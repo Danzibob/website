@@ -8,11 +8,17 @@ Graph = function(nodes = [], connections = {}){
         edges: {}
     }
     this.tmp = {}
+    this.export = function(){
+        return {
+            nodes: this.V,
+            edges: this.E
+        }
+    }
     this.setupDrawing = function(){
         this.isSetup = true
         this.draw_nodes = {}
         for(var n in this.V){
-            this.draw_nodes[this.V[n]] = new Node(createVector(random(width), random(height)),this.V[n])
+            this.draw_nodes[this.V[n]] = new Node(createVector(random(width-100)+50, random(height-100)+50),this.V[n])
         }
         this.draw_edges = {}
         for(var e in this.E){
@@ -325,6 +331,54 @@ Graph = function(nodes = [], connections = {}){
         }
     }
 
+    this.heuristic = function(a,b){
+        var vect = p5.Vector.sub(this.draw_nodes[a].pos,this.draw_nodes[b].pos)
+        return vect.mag()/scl
+    }
+
+    this.AStar = function(a,b){
+        var current = a
+        var open = []
+        var closed = []
+        var table = {}
+        table[a] = {G: 0,H: this.heuristic(a,b),prnt: false}
+        table[a].F = table[a].G + table[a].H
+        open.push(a)
+        while(current != b){
+            if(current === undefined){console.log("out of nodes"); return false}
+            console.log("Using node "+current)
+            open.splice(open.indexOf(current),1)
+            closed.push(current)
+            for(nbr in this.nodes[current]){
+                console.log("Checking ", nbr)
+                if(closed.indexOf(nbr) == -1){
+                    table[nbr] = {H: this.heuristic(nbr,b),prnt: current}
+                    var edge = [current,nbr].sort().join("")
+                    var newG = table[current].G + this.E[edge]
+                    if(table[nbr].G == undefined || table[nbr].G > newG){
+                        table[nbr].G = newG
+                    }
+                    table[nbr].F = table[nbr].G + table[nbr].H
+                    if(open.indexOf(nbr) == -1){open.push(nbr)}
+                }
+            }
+            var minval = undefined,min = undefined
+            for(var i in open){
+                if(minval === undefined || table[open[i]].F < minval){
+                    minval = table[open[i]].F
+                    min = open[i]
+                }
+            }
+            current = min
+        }
+        var path = [b]
+        while(path[path.length-1] != false){
+            path.push(table[path[path.length-1]].prnt)
+        }
+        path.pop()
+        path.reverse()
+        return path
+    }
 }
 
 function minInObject(obj){

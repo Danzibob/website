@@ -22,10 +22,10 @@ function setup(){
     createCanvas(500,500).parent("sketch")
     physics = createCheckbox().parent("Physics")
     stress  = createCheckbox().parent("Stress")
-    labels  = createCheckbox().parent("Labels")
+    labels  = createCheckbox("",true).parent("Labels")
     center  = createButton("Center").parent("Center").mousePressed(ctr)
     settle  = createButton("Settle").parent("Settle").mousePressed(settle)
-    scaler  = createSlider(0.3,20,0.01,1).parent("Scale")
+    scaler  = createSlider(0.3,20,3,0.01).parent("Scale")
     damping = createSlider(0.95,0.995,0.97,0.001).parent("Damping")
     drawmode = createCheckbox().parent("DrawMode")
     newgraph = createButton("New Graph").parent("NewGraph").mousePressed(newG)
@@ -157,3 +157,22 @@ function cnsl(text){
     return true
 }
 function clrcnsl(){$("#Console").html("")}
+
+function saveCurrent(name){
+    var all = Cookies.get()
+    if(!(name in all) || confirm("{0} is already in use, and will be overwitten.\nContinue?".format(name))){
+        Cookies.set(name, G.export(), {path: '' })
+    }
+}
+function loadSaved(name){
+    var data = Cookies.getJSON(name)
+    G = new Graph(data.nodes, data.edges)
+    G.process()
+    G.setupDrawing()
+    $("#djSelA").empty()
+    $("#djSelB").empty()
+    for(var n in data.nodes){
+        djSelA.option(data.nodes[n])
+        djSelB.option(data.nodes[n])
+    }
+}

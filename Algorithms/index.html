@@ -10,6 +10,7 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="../libraries/jquery-3.1.0.min.js" ></script>
     <script src="../styleNscripts/page.js"></script>
+    <script src="js.cookie.js"></script>
     <script src="graphDrawing.js"></script>
     <script src="graph.js"></script>
     <script src="presetGraphs.js"></script>
@@ -74,25 +75,37 @@
             <h3>Algorithms</h3>
             <table class="noselect">
                 <tr>
+                    <th>
+                        <h4 style="margin:0px">Pathfinding</h4>
+                        <p><span id="djk"></span></p>
+                    </th>
+                    <th>
+                        Minimum Spanning Tree
+                    </th>
+                    <th>
+                        Controls
+                    </th>
+                </tr>
+                <tr>
                     <td>
-                        <p id="djk"><span onclick="running = 'dijkstraSetup'">Dijkstra</span></p>
+                        <p><button onclick="running = 'dijkstraSetup'">Dijkstra</button></p>
                     </td>
                     <td>
-                        <p><span onclick="running = 'kruskalSetup'">Kruskal</span></p>
+                        <p><button onclick="running = 'kruskalSetup'">Kruskal</button></p>
                     </td>
                     <td>
-                        <p><span onclick=""></span></p>
+                        <p><button onclick="G.clearHighlighting()">Clear Highlighting</button></p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p><span onclick="">A*</span></p>
+                        <p><button onclick="">A*</button></p>
                     </td>
                     <td>
-                        <p><span onclick="">Prim</span></p>
+                        <p><button onclick="">Prim</button></p>
                     </td>
                     <td>
-                        <p><span onclick=""></span></p>
+                        <p><button onclick=""></button></p>
                     </td>
                 </tr>
             </table>
