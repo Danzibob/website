@@ -6,13 +6,12 @@ var Node = function(pos, name, size = 24, hue = false){
     this.acc = createVector(0,0)
     this.name = name
     this.show = function(hlght){
-        noStroke()
+        stroke(0)
+        strokeWeight(1)
         if(this.name in hlght.nodes){
             fill(hlght.nodes[this.name])
             ellipse(this.pos.x, this.pos.y, this.size+6, this.size+6)
         }
-        stroke(0)
-        strokeWeight(1)
         fill(this.hue, 100, 100)
         textFont(fontMono)
         textSize(this.size/1.4)

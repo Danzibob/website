@@ -128,12 +128,12 @@ Graph = function(nodes = [], connections = {}){
                 this.tmp.found = false
                 return true
             }
-            this.highlighted.edges[this.tmp.E] = color(30,50,100)
+            this.highlighted.edges[this.tmp.E] = color(30,100,100)
             for(var i in this.tmp.edges_done){
                 if(this.tmp.edges_done[i] in this.tmp.tree.E){
-                    this.highlighted.edges[this.tmp.edges_done[i]] = color(120,50,100)
+                    this.highlighted.edges[this.tmp.edges_done[i]] = color(120,100,100)
                 } else {
-                    this.highlighted.edges[this.tmp.edges_done[i]] = color(0,50,100)
+                    this.highlighted.edges[this.tmp.edges_done[i]] = color(0,100,100)
                 }
             }
             this.tmp.edges_done.push(this.tmp.E)
@@ -182,13 +182,13 @@ Graph = function(nodes = [], connections = {}){
             for(var i in this.tmp.edges_done){
                 delete this.highlighted.edges[this.tmp.edges_done[i]]
                 if(this.tmp.edges_done[i] in this.tmp.tree.E){
-                    this.highlighted.edges[this.tmp.edges_done[i]] = color(120,50,100)
+                    this.highlighted.edges[this.tmp.edges_done[i]] = color(120,100,100)
                 }
             }
             cnsl("\nEdges in tree:   {0}\nTotal length:    {1}".format(this.tmp.edges_done,this.tmp.len))
         } else {
             for(var i in this.E){
-                this.highlighted.edges[this.E[i]] = color(0,50,100)
+                this.highlighted.edges[this.E[i]] = color(0,100,100)
             }
         }
     }
@@ -269,7 +269,7 @@ Graph = function(nodes = [], connections = {}){
 
             cnsl("Using Node: {0}".format(this.tmp.current))
             for(i in this.tmp.done){
-                this.highlighted.nodes[this.tmp.done[i]] = color(120,50,100)
+                this.highlighted.nodes[this.tmp.done[i]] = color(120,100,100)
             }
             for(i in this.tmp.edges_done){
                 delete this.highlighted.edges[this.tmp.edges_done[i]]
@@ -277,10 +277,10 @@ Graph = function(nodes = [], connections = {}){
             this.highlighted.nodes[this.tmp.current] = color(0,0,100)
             for(var node in this.nodes[this.tmp.current]){
                 var edgeName = [this.tmp.current,node].sort().join("")
-                this.highlighted.edges[edgeName] = color(30,50,100)
+                this.highlighted.edges[edgeName] = color(30,100,100)
                 this.tmp.edges_done.push(edgeName)
                 if(!(node in this.tmp.table) || this.tmp.table[node].dist > this.tmp.table[this.tmp.current].dist+this.nodes[this.tmp.current][node]){
-                    this.highlighted.edges[edgeName] = color(120,50,100)
+                    this.highlighted.edges[edgeName] = color(120,100,100)
                     var dst = undefined
                     try{dst = this.tmp.table[node].dist} catch(err) {}
                     cnsl("    Editing node {0} from {1} to {2}".format(
@@ -310,7 +310,7 @@ Graph = function(nodes = [], connections = {}){
             delete this.highlighted.edges[this.tmp.edges_done[i]]
         }
         for(i in this.tmp.done){
-            this.highlighted.nodes[this.tmp.done[i]] = color(120,50,100)
+            this.highlighted.nodes[this.tmp.done[i]] = color(120,100,100)
         }
         if(this.tmp.done.indexOf(this.tmp.b) == -1){
             cnsl("Target node wasn't reached")
@@ -326,7 +326,7 @@ Graph = function(nodes = [], connections = {}){
             this.tmp.table[this.tmp.b].dist, path.join("->")))
             for(var i = 0; i < path.length -1; i++){
                 var p = [path[i],path[i+1]].sort().join("")
-                this.highlighted.edges[p] = color(120,50,100)
+                this.highlighted.edges[p] = color(120,100,100)
             }
         }
     }
@@ -336,48 +336,72 @@ Graph = function(nodes = [], connections = {}){
         return vect.mag()/scl
     }
 
-    this.AStar = function(a,b){
-        var current = a
-        var open = []
-        var closed = []
-        var table = {}
-        table[a] = {G: 0,H: this.heuristic(a,b),prnt: false}
-        table[a].F = table[a].G + table[a].H
-        open.push(a)
-        while(current != b){
-            if(current === undefined){console.log("out of nodes"); return false}
-            console.log("Using node "+current)
-            open.splice(open.indexOf(current),1)
-            closed.push(current)
-            for(nbr in this.nodes[current]){
-                console.log("Checking ", nbr)
-                if(closed.indexOf(nbr) == -1){
-                    table[nbr] = {H: this.heuristic(nbr,b),prnt: current}
-                    var edge = [current,nbr].sort().join("")
-                    var newG = table[current].G + this.E[edge]
-                    if(table[nbr].G == undefined || table[nbr].G > newG){
-                        table[nbr].G = newG
+    this.AStarSetup = function(a,b){
+        clrcnsl()
+        this.clearHighlighting()
+        this.tmp = {}
+        this.tmp.current = a
+        this.tmp.open = []
+        this.tmp.closed = []
+        this.tmp.table = {}
+        this.tmp.b = b
+        this.tmp.table[a] = {G: 0,H: this.heuristic(a,b),prnt: false}
+        this.tmp.table[a].F = this.tmp.table[a].G + this.tmp.table[a].H
+        this.tmp.open.push(a)
+    }
+    this.AStarMain = function(){
+        if(this.tmp.current != this.tmp.b){
+            this.clearHighlighting()
+            for(var i in this.tmp.open)  {this.highlighted.nodes[this.tmp.open[i]]   = color(120,100,100)}
+            for(var i in this.tmp.closed){this.highlighted.nodes[this.tmp.closed[i]] = color(0  ,100,100)}
+            this.highlighted.nodes[this.tmp.current] = color(200,100,100)
+            if(this.tmp.current === undefined){cnsl("Out of nodes - no possible path"); return false}
+            cnsl("Using node "+this.tmp.current)
+            this.tmp.open.splice(this.tmp.open.indexOf(this.tmp.current),1)
+            this.tmp.closed.push(this.tmp.current)
+            for(nbr in this.nodes[this.tmp.current]){
+                cnsl("    Checking ", nbr)
+                if(this.tmp.closed.indexOf(nbr) == -1){
+                    this.tmp.table[nbr] = {H: this.heuristic(nbr,this.tmp.b),prnt: this.tmp.current}
+                    var edge = [this.tmp.current,nbr].sort().join("")
+                    var newG = this.tmp.table[this.tmp.current].G + this.E[edge]
+                    if(this.tmp.table[nbr].G == undefined || this.tmp.table[nbr].G > newG){
+                        this.tmp.table[nbr].G = newG
+                        this.tmp.table[nbr].F = this.tmp.table[nbr].G + this.tmp.table[nbr].H
+                        cnsl("      Setting new F-cost for {0}, of {1}".format(nbr,this.tmp.table[nbr].F))
                     }
-                    table[nbr].F = table[nbr].G + table[nbr].H
-                    if(open.indexOf(nbr) == -1){open.push(nbr)}
+                    if(this.tmp.open.indexOf(nbr) == -1){this.tmp.open.push(nbr)}
                 }
             }
             var minval = undefined,min = undefined
-            for(var i in open){
-                if(minval === undefined || table[open[i]].F < minval){
-                    minval = table[open[i]].F
-                    min = open[i]
+            for(var i in this.tmp.open){
+                if(minval === undefined || this.tmp.table[this.tmp.open[i]].F < minval){
+                    minval = this.tmp.table[this.tmp.open[i]].F
+                    min = this.tmp.open[i]
                 }
             }
-            current = min
+            this.tmp.current = min
+            return false
+        } else {
+            cnsl("Reached target node!")
+            return true
         }
-        var path = [b]
+    }
+    this.AStarEnd = function(){
+        this.clearHighlighting()
+        var path = [this.tmp.b]
         while(path[path.length-1] != false){
-            path.push(table[path[path.length-1]].prnt)
+            path.push(this.tmp.table[path[path.length-1]].prnt)
         }
         path.pop()
         path.reverse()
-        return path
+        var dist = this.tmp.table[this.tmp.b].G
+        for(var i = 0; i < path.length-1; i++){
+            var edge = [path[i],path[i+1]].sort().join("")
+            this.highlighted.edges[edge] = color(120,100,100)
+        }
+        cnsl("Best path: " + path.join(""))
+        cnsl("Path dist: " + dist)
     }
 }
 

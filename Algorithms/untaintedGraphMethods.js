@@ -97,6 +97,7 @@ this.kruskal = function(){
     return {tree: MST, graph: tree}
 }
 
+//https://www.youtube.com/watch?v=-L-WgKMFuhE
 this.AStar = function(a,b){
     var current = a
     var open = []

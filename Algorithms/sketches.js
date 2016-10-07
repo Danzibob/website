@@ -31,7 +31,7 @@ function setup(){
     newgraph = createButton("New Graph").parent("NewGraph").mousePressed(newG)
     djSelA  = createSelect().parent("djk")
     djSelB  = createSelect().parent("djk")
-    for(n in G.V){
+    for(var n in G.V){
         djSelA.option(G.V[n])
         djSelB.option(G.V[n])
     }
@@ -47,6 +47,9 @@ function draw(){
         if(running == "kruskalEnd"){G.kruskalEnd(); running=false}
         if(running == "kruskalMain"){if(G.kruskalMain()){running="kruskalEnd"}}
         if(running == "kruskalSetup"){G.kruskalSetup(); running="kruskalMain"}
+        if(running == "AStarEnd"){G.AStarEnd(); running=false}
+        if(running == "AStarMain"){if(G.AStarMain()){running="AStarEnd"}}
+        if(running == "AStarSetup"){G.AStarSetup(djSelA.value(),djSelB.value()); running="AStarMain"}
     }
     if(settling > -1){settling++; ctr()}
     if(settling > 20){
@@ -169,8 +172,8 @@ function loadSaved(name){
     G = new Graph(data.nodes, data.edges)
     G.process()
     G.setupDrawing()
-    $("#djSelA").empty()
-    $("#djSelB").empty()
+    $("#djSelA").find('option').remove()
+    $("#djSelB").find('option').remove()
     for(var n in data.nodes){
         djSelA.option(data.nodes[n])
         djSelB.option(data.nodes[n])
