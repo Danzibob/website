@@ -29,13 +29,20 @@ function setup(){
     damping = createSlider(0.95,0.995,0.97,0.001).parent("Damping")
     drawmode = createCheckbox().parent("DrawMode")
     newgraph = createButton("New Graph").parent("NewGraph").mousePressed(newG)
-    djSelA  = createSelect().parent("djk")
-    djSelB  = createSelect().parent("djk")
+    $("#djk").append("<select></select>")
+    $("#djk").append("<select></select>")
     for(var n in G.V){
-        djSelA.option(G.V[n])
-        djSelB.option(G.V[n])
+        $("#djk").children().append("<option value='{0}'>{0}</option>".format(G.V[n]))
     }
     G.setupDrawing()
+    var saved = Cookies.get()
+    for(var c in saved){
+        $("#Saved").append(("<tr id='{0}'>"+
+            "<th>{0}</th>"+
+            "<td><button onclick='tmp=\"{0}\"'></button></td>"+
+            "<td><button onclick='delCookie(\"{0}\")'></button></td>"+
+            "</tr>").format(c))
+    }
     colorMode(HSB)
 }
 
@@ -73,9 +80,8 @@ function draw(){
     if(physics.checked() && !drawmode.checked()){G.simulate(damping.value())}
     G.show(stress.checked(),labels.checked())
     if(tmp != false){
-        G = tmp
-        G.setupDrawing()
-        tmp = false
+        loadSaved(tmp)
+        tmp=false
     }
 }
 
@@ -91,8 +97,7 @@ function mousePressed(){
     if(drawmode.checked() && !grabbed && bounds()){
         var nam = alphabet[G.V.length]
         G.addV(nam)
-        djSelA.option(nam)
-        djSelB.option(nam)
+        $("#djk").children().append("<option value='{0}'>{0}</option>".format(nam))
     }
 }
 
@@ -162,20 +167,40 @@ function cnsl(text){
 function clrcnsl(){$("#Console").html("")}
 
 function saveCurrent(name){
+    $("#Saved #"+name).remove()
     var all = Cookies.get()
     if(!(name in all) || confirm("{0} is already in use, and will be overwitten.\nContinue?".format(name))){
         Cookies.set(name, G.export(), {path: '' })
     }
+    $("#Saved").append(("<tr id='{0}'>"+
+        "<th>{0}</th>"+
+        "<td><button onclick='tmp=\"{0}\"'></button></td>"+
+        "<td><button onclick='delCookie(\"{0}\")'></button></td>"+
+        "</tr>").format(name))
 }
 function loadSaved(name){
     var data = Cookies.getJSON(name)
-    G = new Graph(data.nodes, data.edges)
-    G.process()
-    G.setupDrawing()
-    $("#djSelA").find('option').remove()
-    $("#djSelB").find('option').remove()
-    for(var n in data.nodes){
-        djSelA.option(data.nodes[n])
-        djSelB.option(data.nodes[n])
+    if(data){
+        G = new Graph(data.nodes, data.edges)
+        G.process()
+        if("positions" in data){G.setupDrawing(data.positions)} else {G.setupDrawing()}
+        $("#djk").children().empty()
+        for(var n in data.nodes){
+            $("#djk").children().append("<option value='{0}'>{0}</option>".format(G.V[n]))
+        }
+    }else{return false}
+}
+function delCookie(name){
+    if(!$("DelWarn").checked ){console.log("Warning Disabled")}
+    if(!$("DelWarn").checked || confirm("Are you sure you want to delete " + name + "?")){
+        Cookies.remove(name,{path: ''})
+        $("#Saved #"+name).remove()
     }
 }
+// function saveCookies(){
+//
+//     var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+// }
+// function loadCookies(){
+//
+// }

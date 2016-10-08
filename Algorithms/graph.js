@@ -9,16 +9,28 @@ Graph = function(nodes = [], connections = {}){
     }
     this.tmp = {}
     this.export = function(){
+        var poses = {}
+        for(var i in this.V){
+            poses[this.V[i]] = {x:this.draw_nodes[this.V[i]].pos.x ,y:this.draw_nodes[this.V[i]].pos.y }
+        }
         return {
             nodes: this.V,
-            edges: this.E
+            edges: this.E,
+            positions: poses
         }
     }
-    this.setupDrawing = function(){
+    this.setupDrawing = function(positions = false){
         this.isSetup = true
         this.draw_nodes = {}
-        for(var n in this.V){
-            this.draw_nodes[this.V[n]] = new Node(createVector(random(width-100)+50, random(height-100)+50),this.V[n])
+        if(positions){
+            for(var n in this.V){
+                var pos = createVector(positions[this.V[n]].x, positions[this.V[n]].y)
+                this.draw_nodes[this.V[n]] = new Node(pos,this.V[n])
+            }
+        } else {
+            for(var n in this.V){
+                this.draw_nodes[this.V[n]] = new Node(createVector(random(width-100)+50, random(height-100)+50),this.V[n])
+            }
         }
         this.draw_edges = {}
         for(var e in this.E){

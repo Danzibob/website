@@ -93,11 +93,13 @@ table,td,th{
 }
 td,th{
     border-width:1px;
-    padding:12px;
+    padding:8px;
 }
 table{
     width:100%;
     border-width: 2px;
+    table-layout: fixed;
+    margin-top: 5px;
 }
 img.post_image{
     max-height:256px;

@@ -72,7 +72,6 @@
             </table>
         </div>
         <div class="tab Tab2">
-            <h3>Algorithms</h3>
             <table class="noselect">
                 <tr>
                     <th>
@@ -112,12 +111,24 @@
             <pre><code class="javascript" id="Console" style="height:250px;"></code></pre>
         </div>
         <div class="tab Tab3">
-            <h3>Graphs</h3>
-            <ul>
-                <li><span onclick="tmp = a">Complete graph of 5 nodes</span></li>
-                <li><span></span></li>
-                <li><span></span></li>
-            </ul>
+            <p>NB: Graphs are stored in your browser cookies, so <em>by saving a graph you consent to this site using cookies</em>. This also means saving may not be persistent due to any cookie wipes that your browser may automatically run.</p>
+            <div style="text-align: center">
+                <div style="display:inline-block">
+                    <input type="text" style="width: 150px" id="graphName" placeholder="Enter save name here"/>
+                    <button style="width: 150px" onclick="saveCurrent($('#graphName').val())">Save Graph</button>
+                </div>
+            </div>
+            <table id="Saved"></table>
+            <table><tr>
+                <td>Enable warning for deleting graphs:</td>
+                <td><input type="checkbox" checked id="DelWarn"></td>
+            </tr>
+            <!-- <tr>
+                <td><button onclick="saveCookies()"></button></td>
+                <td><input id="CookieFile" type="file"/><button onclick="loadCookies()"></button></td>
+            </tr> -->
+        </table>
+
         </div>
     </div>
     <div id="header"></div>
