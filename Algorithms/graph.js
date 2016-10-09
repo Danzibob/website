@@ -116,6 +116,15 @@ Graph = function(nodes = [], connections = {}){
         }
     }
 
+    this.autoScale = function(){
+        var vals = []
+        for(var edge in this.draw_edges){
+            vals.push(this.draw_edges[edge].idealScale())
+        }
+        var index = floor(vals.length/2.78)
+        return vals[index]
+    }
+
     this.kruskalSetup = function(){
         clrcnsl()
         this.clearHighlighting()
@@ -197,7 +206,7 @@ Graph = function(nodes = [], connections = {}){
                     this.highlighted.edges[this.tmp.edges_done[i]] = color(120,100,100)
                 }
             }
-            cnsl("\nEdges in tree:   {0}\nTotal length:    {1}".format(this.tmp.edges_done,this.tmp.len))
+            cnsl("\nEdges in tree:   {0}\nTotal length:    {1}".format(Object.keys(this.tmp.tree.E),this.tmp.len))
         } else {
             for(var i in this.E){
                 this.highlighted.edges[this.E[i]] = color(0,100,100)
@@ -280,10 +289,10 @@ Graph = function(nodes = [], connections = {}){
             if(this.tmp.current === undefined){console.log("out of nodes"); return false}
 
             cnsl("Using Node: {0}".format(this.tmp.current))
-            for(i in this.tmp.done){
+            for(var i in this.tmp.done){
                 this.highlighted.nodes[this.tmp.done[i]] = color(120,100,100)
             }
-            for(i in this.tmp.edges_done){
+            for(var i in this.tmp.edges_done){
                 delete this.highlighted.edges[this.tmp.edges_done[i]]
             }
             this.highlighted.nodes[this.tmp.current] = color(0,0,100)
@@ -363,10 +372,7 @@ Graph = function(nodes = [], connections = {}){
     }
     this.AStarMain = function(){
         if(this.tmp.current != this.tmp.b){
-            this.clearHighlighting()
-            for(var i in this.tmp.open)  {this.highlighted.nodes[this.tmp.open[i]]   = color(120,100,100)}
-            for(var i in this.tmp.closed){this.highlighted.nodes[this.tmp.closed[i]] = color(0  ,100,100)}
-            this.highlighted.nodes[this.tmp.current] = color(200,100,100)
+
             if(this.tmp.current === undefined){cnsl("Out of nodes - no possible path"); return false}
             cnsl("Using node "+this.tmp.current)
             this.tmp.open.splice(this.tmp.open.indexOf(this.tmp.current),1)
@@ -393,6 +399,23 @@ Graph = function(nodes = [], connections = {}){
                 }
             }
             this.tmp.current = min
+
+            this.clearHighlighting()
+            for(var i in this.tmp.open)  {this.highlighted.nodes[this.tmp.open[i]]   = color(120,100,100)}
+            for(var i in this.tmp.closed){this.highlighted.nodes[this.tmp.closed[i]] = color(0  ,100,100)}
+            this.highlighted.nodes[this.tmp.current] = color(200,100,100)
+            var path = [this.tmp.current]
+            while(path[path.length-1] != false){
+                path.push(this.tmp.table[path[path.length-1]].prnt)
+                console.log(path)
+            }
+            path.pop()
+            path.reverse()
+            for(var i = 0; i < path.length-1; i++){
+                var edge = [path[i],path[i+1]].sort().join("")
+                this.highlighted.edges[edge] = color(200,100,100)
+            }
+
             return false
         } else {
             cnsl("Reached target node!")
@@ -414,6 +437,69 @@ Graph = function(nodes = [], connections = {}){
         }
         cnsl("Best path: " + path.join(""))
         cnsl("Path dist: " + dist)
+    }
+    this.primSetup = function(){
+        clrcnsl()
+        this.clearHighlighting()
+        cnsl("Starting at node "+this.V[0])
+        this.tmp = {}
+        this.tmp.tree_edges = []
+        this.tmp.tree_nodes = [this.V[0]]
+        this.tmp.total_length = 0
+        this.highlighted.nodes[this.V[0]] = color(120,100,100)
+    }
+    this.primMain1 = function(){
+        for(var e in this.highlighted.edges){
+            if(this.tmp.tree_edges.indexOf(e) == -1){
+                this.highlighted.edges[e] = color(0,100,100)
+            }
+        }
+        var best_edge = null
+        var min_length = Infinity
+        var tested_edges = ""
+        for(var n in this.tmp.tree_nodes){
+            for(var other in this.nodes[this.tmp.tree_nodes[n]]){
+                var edge_length = this.nodes[this.tmp.tree_nodes[n]][other]
+                var edge_name = [this.tmp.tree_nodes[n],other].sort().join("")
+                if(this.tmp.tree_nodes.indexOf(other) == -1){
+                    this.highlighted.edges[edge_name] = color(30,100,100)
+                    if(edge_length < min_length){
+                        best_edge = [this.tmp.tree_nodes[n],other]
+                        min_length = edge_length
+                    }
+                    tested_edges += edge_name + " "
+                }
+            }
+        }
+        this.tmp.best_edge = best_edge
+        cnsl("Available edges: " + tested_edges)
+    }
+    this.primMain2 = function(){
+            this.tmp.tree_nodes.push(this.tmp.best_edge[1])
+            var edge_name = this.tmp.best_edge.sort().join("")
+            this.highlighted.edges[edge_name] = color(120,100,100)
+            this.tmp.tree_edges.push(edge_name)
+            this.tmp.total_length += this.E[edge_name]
+            cnsl("Shortest edge was {0}, with length {1}\nAdding {0} to tree".format(
+                edge_name,this.E[edge_name]))
+            cnsl("")
+            for(var n in this.tmp.tree_nodes){
+                this.highlighted.nodes[this.tmp.tree_nodes[n]] = color(120,100,100)
+            }
+        if(this.tmp.tree_nodes.length < this.V.length){return false}
+        else { return true }
+    }
+    this.primEnd = function(){
+        for(var n in this.tmp.tree_nodes){
+            this.highlighted.nodes[this.tmp.tree_nodes[n]] = color(120,100,100)
+        }
+        for(var e in this.highlighted.edges){
+            if(this.tmp.tree_edges.indexOf(e) == -1){
+                delete this.highlighted.edges[e]
+            }
+        }
+        cnsl("Total path length = " + String(this.tmp.total_length))
+        cnsl("Edges used: " + this.tmp.tree_edges.sort().join(","))
     }
 }
 

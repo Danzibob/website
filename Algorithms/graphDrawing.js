@@ -37,7 +37,6 @@ var Edge = function(a,b,base_length, force=0.001){
     this.applyForce = function(){
         var v = p5.Vector.sub(this.b.pos, this.a.pos)
         var x = v.mag()-this.base_len*scl
-        x = x
         if(x > 0){
             v.setMag(x)
         } else {
@@ -75,5 +74,10 @@ var Edge = function(a,b,base_length, force=0.001){
         }
         strokeWeight(3)
         line(a.pos.x, a.pos.y, b.pos.x, b.pos.y)
+    }
+    this.idealScale = function(){
+        var v = p5.Vector.sub(this.b.pos, this.a.pos)
+        var s = v.mag()/this.base_len
+        return s
     }
 }
