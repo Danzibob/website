@@ -399,7 +399,6 @@ Graph = function(nodes = [], connections = {}){
                 }
             }
             this.tmp.current = min
-
             this.clearHighlighting()
             for(var i in this.tmp.open)  {this.highlighted.nodes[this.tmp.open[i]]   = color(120,100,100)}
             for(var i in this.tmp.closed){this.highlighted.nodes[this.tmp.closed[i]] = color(0  ,100,100)}
@@ -415,7 +414,6 @@ Graph = function(nodes = [], connections = {}){
                 var edge = [path[i],path[i+1]].sort().join("")
                 this.highlighted.edges[edge] = color(200,100,100)
             }
-
             return false
         } else {
             cnsl("Reached target node!")
