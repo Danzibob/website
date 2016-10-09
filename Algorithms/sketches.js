@@ -1,7 +1,7 @@
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 var docMX=0
 var docMY=0
-var physics, stress, labels, scaler, damping, settle, follow,drawmode,newgraph
+var physics, stress, labels, scaler, damping, settle, follow,drawmode,newgraph,speedslider
 var newA, newB, djSelA, djSelB
 var settling = false
 var grabbed = false
@@ -19,7 +19,9 @@ function preload(){
     }
 }
 function setup(){
-    createCanvas(500,500).parent("sketch")
+    var w = floor($("#left_pane").width()-2)
+    var h = floor($("#left_pane").height()-8)
+    createCanvas(w,h).parent("sketch")
     physics = createCheckbox().parent("Physics")
     stress  = createCheckbox().parent("Stress")
     labels  = createCheckbox("",true).parent("Labels")
@@ -29,8 +31,9 @@ function setup(){
     damping = createSlider(0.95,0.995,0.97,0.001).parent("Damping")
     drawmode = createCheckbox().parent("DrawMode")
     newgraph = createButton("New Graph").parent("NewGraph").mousePressed(newG)
-    $("#djk").append("<select></select>")
-    $("#djk").append("<select></select>")
+    speedslider = createSlider(1,200,60,1).parent("SpeedSlider")
+    $("#djk").append("<select id=\"djSelA\"></select>")
+    $("#djk").append("<select id=\"djSelB\"></select>")
     for(var n in G.V){
         $("#djk").children().append("<option value='{0}'>{0}</option>".format(G.V[n]))
     }
@@ -39,24 +42,29 @@ function setup(){
     for(var c in saved){
         $("#Saved").append(("<tr id='{0}'>"+
             "<th>{0}</th>"+
-            "<td><button onclick='tmp=\"{0}\"'></button></td>"+
-            "<td><button onclick='delCookie(\"{0}\")'></button></td>"+
+            "<td><button onclick='tmp=\"{0}\"'>Load</button></td>"+
+            "<td><button onclick='delCookie(\"{0}\")'>Delete</button></td>"+
             "</tr>").format(c))
     }
     colorMode(HSB)
 }
 
 function draw(){
-    if(running && frameCount % 60 == 0){
-        if(running == "dijkstraEnd"){G.dijkstraEnd(); running=false}
-        if(running == "dijkstraMain"){if(G.dijkstraMain()){running="dijkstraEnd"}}
-        if(running == "dijkstraSetup"){G.dijkstraSetup(djSelA.value(),djSelB.value()); running="dijkstraMain"}
-        if(running == "kruskalEnd"){G.kruskalEnd(); running=false}
-        if(running == "kruskalMain"){if(G.kruskalMain()){running="kruskalEnd"}}
-        if(running == "kruskalSetup"){G.kruskalSetup(); running="kruskalMain"}
-        if(running == "AStarEnd"){G.AStarEnd(); running=false}
-        if(running == "AStarMain"){if(G.AStarMain()){running="AStarEnd"}}
-        if(running == "AStarSetup"){G.AStarSetup(djSelA.value(),djSelB.value()); running="AStarMain"}
+    if(running && frameCount % speedslider.value() == 0){
+        if(running == "dijkstraEnd"){G.dijkstraEnd(); running=false} else
+        if(running == "dijkstraMain"){if(G.dijkstraMain()){running="dijkstraEnd"}} else
+        if(running == "dijkstraSetup"){G.dijkstraSetup($("#djSelA").val(),$("#djSelB").val()); running="dijkstraMain"} else
+        if(running == "kruskalEnd"){G.kruskalEnd(); running=false} else
+        if(running == "kruskalMain"){if(G.kruskalMain()){running="kruskalEnd"}} else
+        if(running == "kruskalSetup"){G.kruskalSetup(); running="kruskalMain"} else
+        if(running == "AStarEnd"){G.AStarEnd(); running=false} else
+        if(running == "AStarMain"){if(G.AStarMain()){running="AStarEnd"}} else
+        if(running == "AStarSetup"){G.AStarSetup($("#djSelA").val(),$("#djSelB").val()); running="AStarMain"} else
+        if(running == "primEnd"){G.primEnd(); running=false} else
+        if(running == "primMain1"){G.primMain1(); running="primMain2"} else
+        if(running == "primMain2"){if(G.primMain2()){running="primEnd"} else {running="primMain1"}} else
+        if(running == "primSetup"){G.primSetup(); running="primMain1"}
+
     }
     if(settling > -1){settling++; ctr()}
     if(settling > 20){
@@ -76,7 +84,7 @@ function draw(){
     }
     scl = scaler.value()*scaler.value()
 
-    background(51)
+    background(21)
     if(physics.checked() && !drawmode.checked()){G.simulate(damping.value())}
     G.show(stress.checked(),labels.checked())
     if(tmp != false){
@@ -170,12 +178,12 @@ function saveCurrent(name){
     $("#Saved #"+name).remove()
     var all = Cookies.get()
     if(!(name in all) || confirm("{0} is already in use, and will be overwitten.\nContinue?".format(name))){
-        Cookies.set(name, G.export(), {path: '' })
+        Cookies.set(name, G.export(), {path: '', expires: 10000})
     }
     $("#Saved").append(("<tr id='{0}'>"+
         "<th>{0}</th>"+
-        "<td><button onclick='tmp=\"{0}\"'></button></td>"+
-        "<td><button onclick='delCookie(\"{0}\")'></button></td>"+
+        "<td><button onclick='tmp=\"{0}\"'>Load</button></td>"+
+        "<td><button onclick='delCookie(\"{0}\")'>Delete</button></td>"+
         "</tr>").format(name))
 }
 function loadSaved(name){
@@ -191,8 +199,8 @@ function loadSaved(name){
     }else{return false}
 }
 function delCookie(name){
-    if(!$("DelWarn").checked ){console.log("Warning Disabled")}
-    if(!$("DelWarn").checked || confirm("Are you sure you want to delete " + name + "?")){
+    if(!$("#DelWarn").is(":checked") ){console.log("Warning Disabled")}
+    if(!$("#DelWarn").is(":checked") || confirm("Are you sure you want to delete " + name + "?")){
         Cookies.remove(name,{path: ''})
         $("#Saved #"+name).remove()
     }
@@ -204,3 +212,7 @@ function delCookie(name){
 // function loadCookies(){
 //
 // }
+function autoScale(){
+    var s = G.autoScale()
+    $("#Scale input").val(pow(s,0.5));
+}

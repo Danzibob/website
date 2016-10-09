@@ -16,6 +16,11 @@
     <script src="presetGraphs.js"></script>
     <script src="sketches.js"></script>
     <title>Graph Theory</title>
+    <style>
+        canvas:hover{
+            cursor: crosshair;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,8 +28,8 @@
         <h1>Graph Theory</h1>
     </a>
     <div style="float:clear; height:60px; width:100%"></div>
-    <div id="left_pane">
-        <div id="sketch"></div>
+    <div id="left_pane" style="overflow: hidden">
+        <div id="sketch" style="margin-top: 10px;"></div>
     </div>
 
     <div id="right_pane">
@@ -56,7 +61,7 @@
                     <th>Damping</th>
                 </tr>
                 <tr>
-                    <td id="Scale"></td>
+                    <td id="Scale"><button onclick="autoScale()">Auto</button></td>
                     <td id="Damping"></td>
                 </tr>
             </table>
@@ -99,16 +104,17 @@
                 <tr>
                     <td>
                         <p><button onclick="running = 'AStarSetup'">A*</button></p>
+                        <p>(Settle graph first)</p>
                     </td>
                     <td>
-                        <p><button onclick="">Prim</button></p>
+                        <p><button onclick="running = 'primSetup'">Prim</button></p>
                     </td>
-                    <td>
-                        <p><button onclick=""></button></p>
+                    <td id="SpeedSlider">
+                        <p>Step Delay</p>
                     </td>
                 </tr>
             </table>
-            <pre><code class="javascript" id="Console" style="height:250px;"></code></pre>
+            <pre><code class="javascript" id="Console" style="height:200px;"></code></pre>
         </div>
         <div class="tab Tab3">
             <p>NB: Graphs are stored in your browser cookies, so <em>by saving a graph you consent to this site using cookies</em>. This also means saving may not be persistent due to any cookie wipes that your browser may automatically run.</p>
@@ -119,10 +125,8 @@
                 </div>
             </div>
             <table id="Saved"></table>
-            <table><tr>
-                <td>Enable warning for deleting graphs:</td>
-                <td><input type="checkbox" checked id="DelWarn"></td>
-            </tr>
+            <input type="checkbox" checked id="DelWarn" style="float:left;margin-top:7px;">
+            <p style="float:left">Enable warning for graph deletion</p>
             <!-- <tr>
                 <td><button onclick="saveCookies()"></button></td>
                 <td><input id="CookieFile" type="file"/><button onclick="loadCookies()"></button></td>

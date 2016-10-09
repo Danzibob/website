@@ -141,3 +141,38 @@ this.AStar = function(a,b){
     path.reverse()
     return path
 }
+
+this.prim = function(){
+    // Add starting node to tree
+    var tree_edges = []
+    var tree_nodes = [this.V[0]]
+    var total_length = 0
+    // Until all nodes are in tree
+    while(tree_nodes.length < this.V.length){
+        // Empty list of possible edges
+        var best_edge = null
+        var min_length = Infinity
+        // For each node in the tree
+        for(var n in tree_nodes){
+            console.log(tree_nodes[n])
+            // For each connected edge
+            for(var other in this.nodes[tree_nodes[n]]){
+                console.log("    ", other)
+                // As long as the node connected to isnt in the tree,
+                // AND it has a shorter distance than the current best
+                var edge_length = this.nodes[tree_nodes[n]][other]
+                if(tree_nodes.indexOf(other) == -1 && edge_length < min_length){
+                    // Make edge new best
+                    best_edge = [tree_nodes[n],other]
+                    min_length = edge_length
+                }
+            }
+        }
+        tree_nodes.push(best_edge[1])
+        var edge_name = best_edge.sort().join("")
+        tree_edges.push(edge_name)
+        total_length += this.E[edge_name]
+        console.log("===========")
+    }
+    return tree_edges
+}
