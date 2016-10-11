@@ -144,7 +144,12 @@ function mouseReleased(){
     grabbed = false
 }
 function ctr(){G.center()}
-function newG(){G = new Graph(); G.process(); G.setupDrawing()}
+function newG(){
+    G = new Graph();
+    G.process();
+    G.setupDrawing()
+    $("#djk").children().empty()
+}
 function settle(){
     $("#DrawMode input").prop('checked',false)
     $("#Physics input").prop('checked',true)

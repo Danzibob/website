@@ -22,22 +22,45 @@
     <div id="left_pane">
         <div class="tab Tab1">
             <pre class="noselect"><code class="javascript"><!--
-!-->
+!-->function setup(){
+    createCanvas(400,200)
+    background(51)
+}
+function draw(){
+    fill(255)
+    noStroke()
+    if(mouseX < width/2){
+        ellipse(mouseX,mouseY,8,8)
+    }
+}
 </code></pre>
-        <div id="S2-1"></div>
+        <div id="S3-1"></div>
         <div id="slider_holder"></div>
         </div>
         <div class="tab Tab2">
             <pre class="noselect"><code class="javascript"><!--
-!-->
+!-->function setup(){
+    createCanvas(400,200)
+    background(51)
+}
+function draw(){
+    noStroke()
+    if(mouseX < width/2){
+        fill(255)
+        ellipse(mouseX + width/2, mouseY, 8, 8)
+    } else {
+        fill(255,0,0)
+        ellipse(mouseX - width/2, mouseY, 8, 8)
+    }
+}
 </code></pre>
-        <div id="S2-2"></div>
+        <div id="S3-2"></div>
         </div>
         <div class="tab Tab3">
             <pre class="noselect"><code class="javascript"><!--
 !-->
 </code></pre>
-        <div id="S2-3"></div>
+        <div id="S3-3"></div>
         </div>
     </div>
 
@@ -51,15 +74,40 @@
             <h3>IF Statements</h3>
             <p>If statements are the programmer's way of telling
             the computer to make a decision; do I run this bit of code or not?</p>
-            
+            <pre class="noselect"><code class="javascript"><!--
+!-->if(i < 10){ //IF the variable i is less than 10
+//Run this bit of code
+}
+</code></pre>
+            <p>In a sketch we can use this to determine if a certian condition is met.
+                For example on the left, an ellipse is only drawn when the mouse
+                is in the left half of the canvas</p>
         </div>
         <div class="tab Tab2">
-            <h3>Lists</h3>
-
+            <h3>ELSE Statements</h3>
+            <p>The ELSE statement allows us to have an alternative action for when
+                our IF statement isn't run.</p>
+            <pre class="noselect"><code class="javascript"><!--
+!-->if(i < 10){ //IF the variable i is less than 10
+//Run this bit of code
+} else { //ELSE the variable i ISN'T less than 10
+//Run this bit of code instead
+}
+</code></pre>
+        <p>This time the sketch on the left performs a different action depending
+            on if the mouse is in the left or right half of the canvas</p>
         </div>
         <div class="tab Tab3">
-            <h3>Loops</h3>
-
+            <h3>Math</h3>
+            <p>We've already had some basic math, but some of the more useful
+                operations are as follows</p>
+            <p><span>a % b</span> Is the modulus division operator - it gives
+                the remainder when dividing a by b. This is useful when you want
+                to keep a value in a certain range, eg <span>mouseX % 255</span>
+                for a color parameter</p>
+            <p><span>constrain(x, minX, maxX, minY, maxY)</span>
+                lets you take a value you know the maximum and munimum values of,
+                and scale them from that range to a custom range</p>
         </div>
     </div>
     <div id="header"></div>
