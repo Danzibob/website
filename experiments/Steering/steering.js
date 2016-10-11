@@ -2,6 +2,8 @@ var prey = []
 var killCount = 0
 var totalKills = 0
 var maxKills = 0
+var d = new Date();
+var time = d.getTime();
 var pred, sliderA, nom, sliderB, p
 function preload() {
   nom = loadSound('nom.mp3');
@@ -43,19 +45,26 @@ function draw(){
     //draw predator
     pred.draw()
     //update readout
-    if(frameCount % 60 == 0 && frameCount != 0){
+    // if(frameCount % 60 == 0 && frameCount != 0){
         if(killCount > maxKills){maxKills = killCount}
         totalKills += killCount
-        var age = frameCount/60
+        var age = d.getTime() / 1000
+        var t = frameCount / 60
         $("#age").html(age)
+        $("#time").html(t)
         $("#eaten").html(totalKills)
         $("#speed").html(nfc(pred.maxSpeed*60,0))
         $("#force").html(nfc(pred.maxForce,2))
         $("#wps").html(killCount)
         $("#avg").html(nfc(totalKills/age,2))
         $("#max").html(maxKills)
+        $("#alive").html(prey.length)
         killCount = 0
-    }
+    // }
+    fill(100)
+    noStroke()
+    textSize(30)
+    text(d.getTime() - time, 10,height-10)
 }
 
 function distSq(v1,v2){
