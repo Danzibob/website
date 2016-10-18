@@ -1,0 +1,167 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../styleNscripts/page.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atom-one-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script src="../libraries/p5.js" ></script>
+    <script src="../libraries/p5.dom.js" ></script>
+    <script src="../libraries/p5.sound.js" ></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../libraries/jquery-3.1.0.min.js" ></script>
+    <script src="../styleNscripts/page.js"></script>
+    <script src="Scripts/S4.js"></script>
+    <title>ProgSoc</title>
+</head>
+
+<body>
+    <a href="../index.html" id="main_header">
+        <h1>Objects</h1>
+    </a>
+    <div style="float:clear; height:60px; width:100%"></div>
+    <div id="left_pane">
+        <div class="tab Tab1">
+            <p>Yea this doesn't really do anything on its own.
+                Examples on the next tabs.</p>
+        </div>
+        <div class="tab Tab2">
+            <pre class="noselect"><code class="javascript"><!--
+!-->Ball = function(position){
+    this.pos = position
+    this.vel = createVector(random(-3,3),random(-3,3))
+}
+
+var a
+function setup(){
+    p.createCanvas(400,400)
+    a = new Ball(createVector(width/2, height/2))
+}
+function draw(){
+    background(255)
+    a.pos.add(a.vel)
+    if(a.pos.x > width || a.pos.x < 0){
+        a.vel.x = -a.vel.x
+    }
+    if(a.pos.y > height || a.pos.y < 0){
+        a.vel.y = -a.vel.y
+    }
+    ellipse(a.pos.x, a.pos.y, 20, 20)
+}
+</code></pre>
+        <div id="S4-2"></div>
+        </div>
+        <div class="tab Tab3">
+            <pre class="noselect"><code class="javascript"><!--
+!-->BetterBall = function(position){
+    this.pos = position
+    this.vel = createVector(random(-3,3),random(-3,3))
+    this.update = function(){
+        this.pos.add(this.vel)
+        this.pos.add(this.vel)
+        if(this.pos.x > width || this.pos.x < 0){
+            this.vel.x = -this.vel.x
+        }
+        if(this.pos.y > height || this.pos.y < 0){
+            this.vel.y = -this.vel.y
+        }
+    }
+    this.show = function(){
+        ellipse(this.pos.x, this.pos.y, 20, 20)
+    }
+}
+
+var a
+function setup(){
+    createCanvas(400,400)
+    a = new Ball(createVector(width/2, height/2))
+}
+function draw(){
+    background(255)
+    a.update()
+    a.show()
+}
+</code></pre>
+        <div id="S4-3"></div>
+        </div>
+    </div>
+
+    <div id="right_pane">
+        <div class="button_holder" style="margin-top:10px;">
+            <div class="button" onclick="showTab(1)">Objects</div>
+            <div class="button" onclick="showTab(2)">Attributes</div>
+            <div class="button" onclick="showTab(3)">Methods</div>
+        </div>
+        <div class="tab Tab1">
+            <h3>Objects</h3>
+            <p>
+                An object is a new type of <em>thing</em> that we can use when
+                programming, just like <span>int || string || float</span>.
+                Objects are created with constructor functions in which we define
+                what we want them to do. A constructor function is different from
+                a normal function in that we write <span><em>ClassName</em> = function(){...}</span></p>
+            <p>
+                To create a new <b>instance</b> of an object, we use the <span>new</span> statement:
+            </p>
+            <pre class="noselect"><code class="javascript"><!--
+!-->Thing = function(){}
+var a = new Thing()
+</code></pre>
+            <p>
+                However, in this state objects are pretty useless. Move on to
+                the next tab for some uses
+            </p>
+        </div>
+        <div class="tab Tab2">
+            <h3>Attributes</h3>
+            <p>
+                An <b>attribute</b> is another variable stored within an
+                instance of an object. We designate it with the keyword <span>this</span>.
+                By giving the constructor function <b>parameters</b> we can
+                assign a value to an attrubute when we create an object:
+            </p>
+            <pre class="noselect"><code class="javascript"><!--
+!-->Thing = function(newValue){
+    this.value = newValue
+    this.age = 0
+}
+var a = new Thing(4)
+var b = new Thing(2)
+console.log(a.value, b.value)
+// Prints 4 , 2
+</code></pre>
+            <p>
+                This can be useful for storing position or velocity etc.
+                as shown in the example to the left
+            </p>
+        </div>
+        <div class="tab Tab3">
+            <h3>Methods</h3>
+            <p>
+                A method is a special function that runs inside an object,
+                and can use and change the attributes of that object. Here,
+                methods are used to simulate all the physics of the ball,
+                inside the ball object. While this may seem like more code than
+                neccessary, it becomes more useful if we have lots of objects of
+                the same type, all of which have different attributes or colors etc.
+            </p>
+            <p>Here's a simpler example:</p>
+            <pre class="noselect"><code class="javascript"><!--
+!-->Thing = function(name){
+    this.name = name
+    this.greet = function(){
+        console.log("Hello, my name is ", this.name)
+    }
+}
+var a = new Thing("Bob")
+var b = new Thing("Jeff")
+a.greet()
+// Prints: Hello, my name is Bob
+b.greet()
+// Prints: Hello, my name is Jeff
+</code></pre>
+        </div>
+    </div>
+    <div id="header"></div>
+</body>
+
+</html>
