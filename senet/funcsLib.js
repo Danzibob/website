@@ -165,6 +165,8 @@ function takeTurn(Player,turn){
           turn *= -1
         }
       }
+    } else {
+      turn *= -1
     } 
   } else {
     let spaces = sticksToSpaces(Player.throwSticks())
